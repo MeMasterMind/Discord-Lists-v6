@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <title>Welcome To Botzer</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand">Botzer</a>
+        <form class="d-flex">
+          <button class="btn btn-outline-success"><a href="/logout">Logout</a></button>
+      </div>
+    </nav><br><br>
+    <section>
+      <h2>Certified Bots</h2>
+      <% if(certified_bots.length === 0){ %>
+        <h3>There are no currently certified bots</h3>
+      <% } else{ %>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <% certified_bots.forEach(function(bot) { %>
+          <div class="col">
+            <div class="card h-500">
+              <div class="card-body">
+              <img src="<%= bot.botavatar %>" style="width:60px;height:60px;" class="card-img-top" alt="..."><br>
+                <h3 class="card-title"><%= bot.botname %>&nbsp;<img src="https://boatspace.xyz/cdn/img/certified.png" height="40" width="40"></h3>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                  <a href="/bot/<%= bot.botid %>" class="btn btn-primary active" role="button" data-bs-toggle="button" aria-pressed="true">View</a>
+              </div>
+            </div>
+          </div>
+          </div>
+        <% }); %>
+     <% } %>
+    </div>
+    </section><br><br>
+    <section>
+      <h2>Bots</h2>
+      <% if(verified_bots.length === 0){ %>
+        <h3>There are no bots currently listen</h3>
+      <% } else{ %>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+        <% verified_bots.forEach(function(bot) { %>
+          <div class="col">
+            <div class="card h-500">
+              <div class="card-body">
+              <img src="<%= bot.botavatar %>" style="width:60px;height:60px;" class="card-img-top" alt="..."><br>
+                <h3 class="card-title"><%= bot.botname %>&nbsp;<% if(bot.certification === 'certified') { %><img src="https://boatspace.xyz/cdn/img/certified.png" height="45" width="45"><% } %></h3>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                  <a href="/bot/<%= bot.botid %>" class="btn btn-primary active" role="button" data-bs-toggle="button" aria-pressed="true">View</a>
+              </div>
+            </div>
+            </div>
+            </div>
+        <% }); %>
+        </div>
+     <% } %>
+    </section><br><br>
+  </body>
+</html>
+
+<style>
+  body {
+    background-color: #34495E;
+  }
+  .card-body {
+    background-color: #AAB7B8;
+  }
+</style>

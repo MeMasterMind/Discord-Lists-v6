@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <title>Hello | <%= user.username %></title>
+  </head>
+  <body><br><br><br>
+    <center><img src="<%= user.useravatar %>" class="rounded" alt="..."></center>
+    <center><h1><%= user.username %>#<%= user.discriminator %></h1></center><br><br>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      <% bots.forEach(function(bot) { %>
+    <div class="col">
+      <div class="card h-500">
+        <div class="card-body">
+        <img src="<%= bot.botavatar %>"><br>
+          <h3 class="card-title"><%= bot.botname %></h3>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a href="/bot/<%= bot.botid %>" class="btn btn-primary active" role="button" data-bs-toggle="button" aria-pressed="true">View</a>
+        </div>
+      </div>
+    </div>
+    </div>
+    <% }); %>
+   </div>
+  </body>
+</html>

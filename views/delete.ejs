@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <title>Deleting.. | <%= botid.botname %></title>
+  </head>
+  <body>
+    <u><center><h1>Your are going to delete <%= botid.botname %> bot</h1></center></u><br><br><br><br><br><br><br><br>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <center><form class="needs-validation" method="POST" action="/bot/delete/<%= botid.botid %>" novalidate>
+        <div class="col-md-4">
+          <label for="validationCustom01" class="form-label">Please Type <b>DELETE</b> in the text area to delete the bot</label>
+          <input type="text" class="form-control" name="DELETE" id="validationCustom01" placeholder="DELETE" required>
+          <div class="invalid-feedback">
+            You must type <b>DELETE</b> in the text area if you want to delete the bot
+          </div>
+        </div><br>
+        <div class="col-12">
+          <button class="btn btn-primary" type="submit">I Understand And Delete</button>
+          <a href="/bot/<%= botid.botid %>" class="btn btn-primary active" role="button" data-bs-toggle="button" aria-pressed="true">Cancel</a>
+        </div><br>
+      </form></center>
+  </body>
+</html>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+</script>
