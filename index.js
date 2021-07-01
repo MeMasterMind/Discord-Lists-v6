@@ -48,7 +48,7 @@ var prompt = 'consent'
 passport.use(new Strategy({
         clientID: '786125193394651166',
         clientSecret: '2TY8uwcp2Cmv7bxvczy72I5BrZgelMnQ',
-        callbackURL: 'http://localhost:5000/api/callback',
+        callbackURL: 'https://a-botlist-without-a-name.crazybotboy.repl.co/api/callback',
         scope: scopes,
         prompt: prompt,
 }, function(accessToken, refreshToken, profile, done) {

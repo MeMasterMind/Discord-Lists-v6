@@ -12,7 +12,8 @@
   </head>
   <body><br><br><br>
     <center><img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>" class="rounded" alt="..."></center>
-    <center><h1><%= user.username %>#<%= user.discriminator %></h1></center><br><br>
+    <center><h1><%= user.username %>#<%= user.discriminator %></h1></center><br>
+    <center><a class="btn btn-primary" href="/addbot" role="button">Add Bot</a></center><br><br>
     <div class="row row-cols-1 row-cols-md-2 g-4">
       <% bots.forEach(function(bot) { %>
     <div class="col">
@@ -21,12 +22,13 @@
         <img src="<%= bot.botavatar %>"><br>
           <h3 class="card-title"><%= bot.botname %></h3>
           <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a href="/bot/<%= bot.botid %>" class="btn btn-primary active" role="button" data-bs-toggle="button" aria-pressed="true">View</a>
             <a href="/bot/<%= bot.botid %>/edit" class="btn btn-primary active" role="button" data-bs-toggle="button" aria-pressed="true">Edit</a>
             <a href="/bot/<%= bot.botid %>/delete" class="btn btn-primary active" role="button" data-bs-toggle="button" aria-pressed="true">Delete</a></div>
         </div>
       </div>
     </div>
     <% }); %>
-   </div>
+   </div><br><br>
   </body>
 </html>
