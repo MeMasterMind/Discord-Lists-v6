@@ -1,75 +1,75 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+ <%- include('./templates/header.ejs') %>
+ <%- include('./templates/nav.ejs') %> 
 
-    <title>Welcome To Botzer</title>
-  </head>
-  <body>
-    <nav class="navbar navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand">Botzer</a>
-        <form class="d-flex">
-          <button class="btn btn-outline-success"><a href="/logout">Logout</a></button>
-      </div>
-    </nav><br><br>
-    <section>
-      <h2>Certified Bots</h2>
-      <% if(certified_bots.length === 0){ %>
-        <h3>There are no currently certified bots</h3>
+<h1>Discord Lists</h1>
+<br>
+<p>The history of Discord Bots!</p>
+<br>
+
+    <h2 class="heading">Certified Bots</h2><br><br>
+    <div class="container">
+     <% if(certified_bots.length === 0){ %>
+        <h3>No Certified Bots found. Please visit us later.</h3>
       <% } else{ %>
-      <div class="row row-cols-1 row-cols-md-3 g-4">
-        <% certified_bots.forEach(function(bot) { %>
-          <div class="col">
-            <div class="card h-500">
-              <div class="card-body">
-              <img src="<%= bot.botavatar %>" style="width:60px;height:60px;" class="card-img-top" alt="..."><br>
-                <h3 class="card-title"><%= bot.botname %>&nbsp;<img src="https://boatspace.xyz/cdn/img/certified.png" height="40" width="40"></h3>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                  <a href="/bot/<%= bot.botid %>" class="btn btn-primary active" role="button" data-bs-toggle="button" aria-pressed="true">View</a>
-              </div>
-            </div>
-          </div>
-          </div>
-        <% }); %>
+      <% certified_bots.forEach(function(bot) { %>
+      <div class="card">
+        <div class="imgBx">
+          <img src="<%= bot.botavatar %>">
+        </div>
+        <div class="contentBx"><br>
+          <h2 style="font-size: 25xpx;"><%= bot.botname %><img src="https://cdn.glitch.com/1be813f1-4233-4b7a-bf44-8a562481d51f%2FCertified.png?v=1625404757585" width="38" height="38"></h2><br><br>
+          <a href="/bot/<%= bot.botid %>" class="viewbot"><button class="button-main">View</button></a>
+          <a href="<%= bot.invite %>" class="invitebot"><button class="button-main">Invite</button></a>
+        </div>
+      </div>
+              <% }); %>
      <% } %>
     </div>
-    </section><br><br>
-    <section>
-      <h2>Bots</h2>
-      <% if(verified_bots.length === 0){ %>
-        <h3>There are no bots currently listen</h3>
+<br><br><br><br><br>
+    <h2 class="heading">Other Bots</h2><br><br>
+  <div class="container">
+     <% if(verified_bots.length === 0){ %>
+        <h3>No Bots found. Please visit us later.</h3>
       <% } else{ %>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-        <% verified_bots.forEach(function(bot) { %>
-          <div class="col">
-            <div class="card h-500">
-              <div class="card-body">
-              <img src="<%= bot.botavatar %>" style="width:60px;height:60px;" class="card-img-top" alt="..."><br>
-                <h3 class="card-title"><%= bot.botname %>&nbsp;<% if(bot.certification === 'certified') { %><img src="https://boatspace.xyz/cdn/img/certified.png" height="45" width="45"><% } %></h3>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                  <a href="/bot/<%= bot.botid %>" class="btn btn-primary active" role="button" data-bs-toggle="button" aria-pressed="true">View</a>
-              </div>
-            </div>
-            </div>
-            </div>
-        <% }); %>
+      <% verified_bots.forEach(function(bot) { %>
+      <div class="card">
+        <div class="imgBx">
+          <img src="<%= bot.botavatar %>">
         </div>
+        <div class="contentBx"><br>
+          <h2><%= bot.botname %><% if(bot.certification === 'certified'){ %>
+          <img src="https://cdn.glitch.com/1be813f1-4233-4b7a-bf44-8a562481d51f%2FCertified.png?v=1625404757585" height="38" width="38">
+        <% } %></h2><br><br>
+          <a href="/bot/<%= bot.botid %>" class="viewbot"><button class="button-main">View</button></a>
+          <a href="<%= bot.invite %>" class="invitebot"><button class="button-main">Invite</button></a>
+        </div>
+      </div>
+              <% }); %>
      <% } %>
-    </section><br><br>
-  </body>
-</html>
-
-<style>
-  body {
-    background-color: #34495E;
-  }
-  .card-body {
-    background-color: #AAB7B8;
-  }
-</style>
+    </div>
+<br><br><br><br><br>
+    <h2 class="heading">Random Bots</h2><br><br>
+  <div class="container">
+     <% if(random_bot.length === 0){ %>
+        <h3>No Bots found. Please visit us later.</h3>
+      <% } else{ %>
+      <% random_bot.forEach(function(random) { %>
+      <div class="card">
+        <div class="imgBx">
+          <img src="<%= random.botavatar %>">
+        </div>
+        <div class="contentBx"><br>
+          <h2><%= random.botname %><% if(random.certification === 'certified'){ %>
+          <img src="https://cdn.glitch.com/1be813f1-4233-4b7a-bf44-8a562481d51f%2FCertified.png?v=1625404757585" height="38" width="38">
+        <% } %></h2><br><br>
+          <a href="/bot/<%= random.botid %>" class="viewbot"><button class="button-main">View</button></a>
+          <a href="<%= random.invite %>" class="invitebot"><button class="button-main">Invite</button></a>
+        </div>
+       </div>
+      <% }); %>
+     <% } %>
+    </div>
+<br><br><br><br><br>
+      
+ <%- include('./templates/footer.ejs') %> 

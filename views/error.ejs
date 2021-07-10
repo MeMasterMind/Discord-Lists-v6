@@ -1,3 +1,6 @@
+ <%- include('./templates/header.ejs') %>
+ <%- include('./templates/nav.ejs') %> 
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,10 +14,12 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <%- include("templates/header") %>
 
-    <title>Hello, world!</title>
+
+    <title>Discord Lists | 404 Error</title>
   </head>
   <body>
-      <center><h1><%= params.get('code') %> <%= params.get('message') %></h1></center>
+      <h1>Error</h1>
   </body>
 </html>

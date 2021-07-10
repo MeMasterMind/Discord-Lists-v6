@@ -1,3 +1,6 @@
+ <%- include('./templates/header.ejs') %>
+ <%- include('./templates/nav.ejs') %> 
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -7,15 +10,12 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <%- include("templates/header") %>
 
-    <title><%= botid.botname %> | Botzer</title>
+    <title>Discord Lists | <%= botid.botname %></title>
   </head>
   <body>
-    <nav class="navbar navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand">Botzer</a>
-        <form class="d-flex">
-          <button class="btn btn-outline-success"><a href="/logout">Logout</a></button>
+    
       </div>
      </nav><br><br>
      <% if(botid.state === 'unverified'){ %>
@@ -33,29 +33,32 @@
       <div class="alert alert-danger d-flex align-items-center" role="alert">
         <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
         <div>
-          This bot is not verified by reviewers yet. Because of that this bot will not show on the list
+          This bot is not verified by reviewers yet. Because of that this bot will not show on the list.
         </div>
       </div>
     <% } %>
-      <center><h1><%= botid.botname %>&nbsp;<% if(botid.certification === 'certified') { %><img src="https://boatspace.xyz/cdn/img/certified.png" height="45" width="45"><% } %></h1></center>
+      <center><h1><%= botid.botname %>&nbsp;<% if(botid.certification === 'certified') { %><img src="https://cdn.glitch.com/1be813f1-4233-4b7a-bf44-8a562481d51f%2FCertified.png?v=1625404757585" height="45" width="45"><% } %></h1></center>
       <img src='<%= botid.botavatar %>' class="rounded mx-auto d-block" alt="..."><br>
-      <p class="fw-bold">Prefix: <%= botid.botprefix %></p> 
-      <p class="fw-bold">Bot Invite: <a href="<%= botid.invite %>">Invite</a></p>
-      <p class="fw-bold">Owner: <%= botid.botowner %></p>
-      <p class="fw-bold">Server Count: <%= botid.servercount %></p>
+      <ul>
+      <li><p class="fw-bold">Prefix: <%= botid.botprefix %></p></li>
+      <li><p class="fw-bold">Bot Invite: <a href="<%= botid.invite %>">Invite</a></p></li>
+      <li><p class="fw-bold">Owner: <%= botid.botowner %></p></li>
+      <li><p class="fw-bold">Server Count: <%= botid.servercount %></p></li>
       <% if(botid.github){ %>
-        <p class="fw-bold">Github: <a href="<%= botid.github %>">Take Me There!</a></p>
+        <li><p class="fw-bold">Github: <a href="<%= botid.github %>">Take Me There!</a></p></li>
       <% } %>
       <% if(botid.site){ %>
-        <p class="fw-bold">Website: <a href="<%= botid.site %>">Take Me There!</a></p>
+        <li><p class="fw-bold">Website: <a href="<%= botid.site %>">Take Me There!</a></p></li>
       <% } %>
       <% if(botid.support){ %>
-        <p class="fw-bold">Support For Bot: <a href="<%= botid.support %>">Take Me There!</a></p><br>
+        <li><p class="fw-bold">Support For Bot: <a href="<%= botid.support %>">Take Me There!</a></p></li><br>
       <% } %>
+      </ul>
       <div class="card">
         <div class="card-body">
           <%= deslong %>
         </div>
       </div><br><br><br>
+       <%- include('./templates/footer.ejs') %>
   </body>
 </html>

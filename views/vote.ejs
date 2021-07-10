@@ -1,3 +1,6 @@
+ <%- include('./templates/header.ejs') %>
+ <%- include('./templates/nav.ejs') %> 
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -8,7 +11,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
-    <title>Vote for <%= botid.botname %></title>
+    <title>Discord Lists | Voting <%= botid.botname %></title>
   </head>
   <body>
       <center><h3>You're now voting for <%= botid.botname %> bot. You only can vote for 1 bot and you have to wait 12 hours cooldown for next vote. Choose the bot to vote wisely.</h3></center><br>

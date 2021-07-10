@@ -1,4 +1,3 @@
-require('dotenv').config()
 const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
@@ -13,10 +12,11 @@ const fetch = require('node-fetch')
 const Discord = require('discord.js')
 const client = new Discord.Client()
 const config = require('./config.json')
+const PORT = process.env.PORT || 3000 //i changed the port to 3000 since 5000 was causing errors
 
 /*
 * @param1 {string}: Required, message text in String format.
-*
+* 
 * @param2 {function | Object}: Optional, a callback function when the notification element has been clicked. Or, extend the initialize options with new options for each notification element.
 *
 * @param3 {Object}: Optional, extend the initialize options with new options for each notification element (if the second parameter is a callback function).
@@ -24,6 +24,7 @@ const config = require('./config.json')
 
 // Client (Bot) Ready Event
 client.once('ready', () => {
+  client.user.setActivity('? | Discord Lists Beta', { type: 'WATCHING' });
     console.log('[EVENT] Bot Is Online!\n[EVENT] Block Chain Is Online')
 })
 
@@ -31,7 +32,7 @@ client.once('ready', () => {
 app.use(parser.urlencoded({ extended: false })) // Encoding
 app.use(parser.json()) // Parsing json objects
 app.set('view engine', 'ejs') // Set the view engine as ejs
-
+app.use(express.static(__dirname + '/public'));
 passport.serializeUser(function(user, done){
         done(null, user)
 });
@@ -69,14 +70,21 @@ app.use(passport.session()) // Using session
 
 // Main Page
 app.get('/', async function(req, res){
+        const login_logout = req.isAuthenticated()
         const verified_bots = await addbot.find({ state: 'verified' }).limit(2)
+        const random_bot = await addbot.find({ state: 'verified' }).limit(1)
         const certified_bots = await addbot.find({ certification: 'certified' })
-        console.log(verified_bots)
-        console.log(certified_bots)
+        console.log(random_bot)
         res.render('index', {
                 verified_bots: verified_bots,
-                certified_bots: certified_bots
+                certified_bots: certified_bots,
+                random_bot: random_bot,
+                login_logout: login_logout
         })
+})
+
+app.get('/bots', (req,res)=>{
+  res.redirect('/')
 })
 
 // Login with Discord
@@ -84,12 +92,12 @@ app.get('/login', passport.authenticate('discord', { scope: scopes, prompt: prom
 
 // Callback the user
 app.get('/api/callback',
-  passport.authenticate('discord', { failureRedirect: '/' }), async function(req, res) { res.redirect('/user/me')
+  passport.authenticate('discord', { failureRedirect: '/' }), async function(req, res) { res.redirect('/user/@me')
   client.channels.cache.get('829587315516112948').send(
         new Discord.MessageEmbed()
         .setTitle('Login Detected')
         .setColor('GREEN')
-        .setDescription(`\`${req.user.username}\` just logged into the site`)
+        .setDescription(`\`${req.user.username}\` just logged into the site.`)
         .setTimestamp()
   )
 });
@@ -107,33 +115,52 @@ app.get('/info', checkAuth, async function(req, res){
 
 // Redirecting error header to ejs page
 app.get('/error', function(req, res){
+        const login_logout = req.isAuthenticated()
         res.render('error',{
-                req:req
+                req:req,
+                login_logout: login_logout
         })
 })
 
 // Redirecting...
 app.get('/success', function(req, res){
-        res.render('success')
+        const login_logout = req.isAuthenticated()
+        res.render('success', {
+		login_logout
+	})
+})
+
+//Redirecting...
+app.get('/partners', function(req, res){
+        const login_logout = req.isAuthenticated()
+        res.render('partners', {
+          login_logout
+        })
 })
 
 // Redirecting...
 app.get('/edit/success', function(req, res){
-        res.render('editsuccess')
+        const login_logout = req.isAuthenticated()
+        res.render('editsuccess', {
+		login_logout
+	})
 })
 
 // Redirecting...
 app.get('/addbot', checkAuth, async function(req, res){
-    res.render('add')
+	const login_logout = req.isAuthenticated()
+    res.render('add', {
+	    login_logout,
+    })
 })
 
 // Adding bot to MongoDB if there no such data
 app.post('/addbot/success', checkAuth, async function(req, res){
     const info = req.body.id
     const userinfo = req.user
-    const token = process.env.TOKEN
+    const token = process.env['TOKEN']
     const fetchuser = async id => {
-            const response = await fetch(`https://discord.com/api/users/${id}`, {
+            const response = await fetch(`https://discord.com/api/v9/users/${id}`, {
                     headers: {
                             Authorization: `Bot ${token}`
                     }
@@ -197,17 +224,22 @@ app.post('/addbot/success', checkAuth, async function(req, res){
 
 // Getting the bot by ID
 app.get('/bot/:botid', async function(req, res){
+  const login_logout = req.isAuthenticated()
+
         const botid = await addbot.findOne({ botid: req.params.botid })
         if(!botid) return res.redirect('/error?code=404&message=invalid bot')
         const deslong = botid.longdes
         res.render('bot',{
                 botid: botid,
-                deslong: deslong
+                deslong: deslong,
+                login_logout
         })
 })
 
 // Redirecting...
 app.get('/bot/:botid/edit', checkAuth, async function(req, res){
+  const login_logout = req.isAuthenticated()
+
         const info = req.user
         const botid = await addbot.findOne({ botid: req.params.botid })
         if(!botid) return res.redirect('/error?code=404&message=invalid bot')
@@ -217,12 +249,15 @@ app.get('/bot/:botid/edit', checkAuth, async function(req, res){
         }
 
         res.render('edit',{
-                botid:botid
+                botid:botid,
+                login_logout: login_logout
         })
 })
 
 // Editing bot
 app.post('/botedit/success/:botid', checkAuth, async function(req, res){
+  const login_logout = req.isAuthenticated()
+
         await addbot.findOneAndUpdate(
                 {
                         botid: req.params.botid
@@ -242,18 +277,23 @@ app.post('/botedit/success/:botid', checkAuth, async function(req, res){
 
 // Redirecting...
 app.get('/bot/:botid/delete', checkAuth, async function(req, res){
+  const login_logout = req.isAuthenticated()
+
         const info = req.user
         const botid = await addbot.findOne({ botid: req.params.botid })
         if(!botid) return res.redirect('/error?code=404&message=invalid bot id')
         const owner = botid.botowner
         if(!`${info.username}#${info.discriminator}` === owner) return res.redirect('/error?code=403&message=your are unauthorized to access this page')
         res.render('delete', {
-                botid: botid
+                botid: botid,
+                login_logout: login_logout
         })
 })
 
 // Deleting a bot
 app.post('/bot/delete/:botid', async function(req, res) {
+  const login_logout = req.isAuthenticated()
+
         if(req.body.DELETE === 'DELETE'){
         await addbot.findOneAndRemove(
                 {
@@ -266,18 +306,33 @@ app.post('/bot/delete/:botid', async function(req, res) {
 
 //Vanity URL 
 app.get('/bot/x/:vanity', async function(req, res) {
+  const login_logout = req.isAuthenticated()
+
         const vanity = await addbot.findOne({ vanity: req.params.vanity })
         const botid = vanity
         if(vanity){
                 res.render('bot', {
                         botid: vanity,
-                        deslong: vanity.longdes
+                        deslong: vanity.longdes,
+                        login_logout: login_logout
                 })
         }
 })
 
+app.get('/bot/:botid/certification', checkAuth, async function(req, res){
+        const botid = await addbot.findOne({ botid: req.param.botid })
+        if(!botid){
+                res.redirect('/error?code=404&message=We cannot find a bot with that ID')
+        }
+        res.render('certification', {
+                botid: botid
+        })
+})
+
 //Voting API
 app.get('/bot/:botid/vote', checkAuth, async function(req, res) {
+  const login_logout = req.isAuthenticated()
+
         const botid = await addbot.findOne({ botid: req.params.botid })
         res.render('vote', {
                 botid: botid
@@ -285,6 +340,8 @@ app.get('/bot/:botid/vote', checkAuth, async function(req, res) {
 })
 
 app.post('/bot/vote/:botid', checkAuth, async function(req, res) {
+  const login_logout = req.isAuthenticated()
+
         const user = await member.findOne({ username: `${req.user.username}#${req.user.discriminator}` })
         const bot = await addbot.findOne({ botid: `${req.params.botid}` })
         await user.findOneAndUpdate(
@@ -298,8 +355,9 @@ app.post('/bot/vote/:botid', checkAuth, async function(req, res) {
 })
 
 // My Profile Data
-app.get('/user/me', checkAuth, async function(req, res){
+app.get('/user/@me', checkAuth, async function(req, res){
         const user = req.user
+        const login_logout = req.isAuthenticated()
         const me = await member.findOne({ username: `${req.user.username}#${req.user.discriminator}` })
         if(!me){
                 await member.findOneAndUpdate(
@@ -318,7 +376,8 @@ app.get('/user/me', checkAuth, async function(req, res){
         const bots = botdata
         res.render('me', {
                 bots: bots,
-                user: user
+                user: user,
+                login_logout: login_logout
         })
 })
 
@@ -330,28 +389,37 @@ app.get('/user/:userid', async function(req, res) {
         } else {
                 res.render('user', {
                         user: user,
-                        bots: bots
+                        bots: bots,
+                        login_logout: login_logout
                 })
         }
 })
 
 // Other Links
-app.get('/discord', function(req, res) {
-        res.redirect('https://discord.gg/9h6ZkkMdeA')
+app.get(['/invite', '/join'], async function(req, res){
+  res.redirect("https://discord.gg/3sdkRuk63p")
 })
 
-app.get('/github', function(req, res) {
-        res.redirect('https://github.com')
+app.get('/terms', async function(req, res){
+  res.redirect("https://github.com/Discord-Lists/Terms-Of-Service")
 })
 
-app.get('/patreon', function(req, res) {
-        res.redirect('https://patreon.com/grooverbot')
+app.get('twitter', async function(req, res){
+  res.redirect('https://twitter.com/DiscordLists100')
 })
 
-app.get('/docs', function(req, res) {
-        res.redirect('https://pasindudushan07.gitbook.io/botzer-api-docs/')
+app.get('/github', async function(req, res){
+  res.redirect('https://github.com/Discord-Lists')
 })
-
+//Partnerships: 
+//Pages:
+app.get('/partners/page/crazytech', async function(req, res){
+    res.render('partnerships/crazytech-development')
+})
+//Redirecting:
+app.get('/partners/invite/crazytech', async function(req, res){
+  res.redirect('https://discord.gg/DD4QG65H6V')
+})
 // API
 app.get('/api', function(req, res) {
         res.json({"code": "200", "message": "api endpoint"})
@@ -417,7 +485,7 @@ function makeAPI(length) {
 }
 
 // Starting Express Server With PORT 5000
-app.listen(5000, async function(err){
+app.listen(PORT, async function(err){
         await mongoose.connect('mongodb+srv://Admin:Admin1234@new-bot-list.w0s2g.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
                 useNewUrlParser: true,
                 useUnifiedTopology: true

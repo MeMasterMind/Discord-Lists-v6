@@ -9,7 +9,8 @@ module.exports = {
            message.channel.send({
                embed:{
                    color:'RED',
-                   description:'You must secify a botID'
+                   title:'Error:',
+                   description:'You must secify a valid bot ID'
                }
            })
            return
@@ -20,6 +21,7 @@ module.exports = {
            message.channel.send({
                embed:{
                    color:'RED',
+                   title:'Error:',
                    description: 'We cannot find that bot id in our system.'
                }
            })
@@ -36,12 +38,14 @@ module.exports = {
        channel.send({
         embed:{
             color:'BLUE',
+            title:'Bot Certified:',
             description: `<@${args[0]}> certified.\n\nCertification Give By: <@${message.author.id}>`
         }
        })
        message.channel.send({
            embed:{
                color:'BLUE',
+               title:'Success:',
                description: `You have successfully certified <@${args[0]}>`
            }
        })

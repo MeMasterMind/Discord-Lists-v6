@@ -10,7 +10,8 @@ module.exports = {
            message.channel.send({
                embed:{
                    color:'RED',
-                   description:'You must type a botid'
+                   title:'Error:',
+                   description:'You must type a valid bot ID'
                }
            })
            return
@@ -23,6 +24,7 @@ module.exports = {
            message.channel.send({
                embed:{
                    color:'RED',
+                   title:'Error:',
                    description: 'We cannot find that bot id in our system.'
                }
            })
@@ -37,12 +39,14 @@ module.exports = {
        channel.send({
         embed:{
             color:'RED',
+            title:'Bot Denied:',
             description: `<@${args[0]}> was denied.\n\nReviewer: <@${message.author.id}>\nReason: ${reason}`
         }
        })
        message.channel.send({
            embed:{
                color:'BLUE',
+               title:'Success:',
                description:`<@${args[0]}> declined.\nReason: **${reason}**`
            }
        })

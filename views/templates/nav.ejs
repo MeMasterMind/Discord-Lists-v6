@@ -1,0 +1,14 @@
+<nav id='menu'>
+  <input type='checkbox' id='responsive-menu' onclick='updatemenu()'><label></label>
+  <ul>
+    <li><a href='/'>Home</a></li>
+    <li><a href='/bots'>Bots</a></li>
+    <li><a href='/bots'>Search</a></li>
+    <li><a href='/invite'>Discord</a></li>
+    <% if(login_logout){ %>
+          <li><a href='/logout'>Logout</a></li>
+          <% } else{ %>  
+          <li><a href='/login'>Login</a></li>
+   <% } %>
+  </ul>
+</nav>

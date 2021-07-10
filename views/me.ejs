@@ -1,3 +1,6 @@
+ <%- include('./templates/header.ejs') %>
+ <%- include('./templates/nav.ejs') %> 
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -7,13 +10,16 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <%- include("templates/header") %>
 
-    <title>Hello | <%= user.username %></title>
+
+    <title>Discord Lists | Hello <%= user.username %></title>
   </head>
   <body><br><br><br>
     <center><img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>" class="rounded" alt="..."></center>
     <center><h1><%= user.username %>#<%= user.discriminator %></h1></center><br>
     <center><a class="btn btn-primary" href="/addbot" role="button">Add Bot</a></center><br><br>
+    <center><a class="btn btn-primary" href="/" role ="button">Return Home</a></center><br><br>
     <div class="row row-cols-1 row-cols-md-2 g-4">
       <% bots.forEach(function(bot) { %>
     <div class="col">
