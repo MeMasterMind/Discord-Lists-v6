@@ -72,6 +72,10 @@ const bot = new mongoose.Schema({
     vanity: {
         type: String,
         required: true
+    },
+    votes: {
+        type: String,
+        required: true
     }
 })
 

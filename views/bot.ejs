@@ -39,21 +39,20 @@
     <% } %>
       <center><h1><%= botid.botname %>&nbsp;<% if(botid.certification === 'certified') { %><img src="https://cdn.glitch.com/1be813f1-4233-4b7a-bf44-8a562481d51f%2FCertified.png?v=1625404757585" height="45" width="45"><% } %></h1></center>
       <img src='<%= botid.botavatar %>' class="rounded mx-auto d-block" alt="..."><br>
-      <ul>
-      <li><p class="fw-bold">Prefix: <%= botid.botprefix %></p></li>
-      <li><p class="fw-bold">Bot Invite: <a href="<%= botid.invite %>">Invite</a></p></li>
-      <li><p class="fw-bold">Owner: <%= botid.botowner %></p></li>
-      <li><p class="fw-bold">Server Count: <%= botid.servercount %></p></li>
+      <center>
+      <p class="fw-bold">Prefix: <%= botid.botprefix %></p>
+      <p class="fw-bold">Bot Invite: <a href="<%= botid.invite %>">Invite</a></p>
+      <p class="fw-bold">Owner: <%= botid.botowner %></p>
+      <p class="fw-bold">Server Count: <%= botid.servercount %></p>
       <% if(botid.github){ %>
-        <li><p class="fw-bold">Github: <a href="<%= botid.github %>">Take Me There!</a></p></li>
+        <p class="fw-bold">Github: <a href="<%= botid.github %>">Take Me There!</a></p>
       <% } %>
       <% if(botid.site){ %>
-        <li><p class="fw-bold">Website: <a href="<%= botid.site %>">Take Me There!</a></p></li>
+        <p class="fw-bold">Website: <a href="<%= botid.site %>">Take Me There!</a></p>
       <% } %>
       <% if(botid.support){ %>
-        <li><p class="fw-bold">Support For Bot: <a href="<%= botid.support %>">Take Me There!</a></p></li><br>
+        <p class="fw-bold">Support For Bot: <a href="<%= botid.support %>">Take Me There!</a></p><br>
       <% } %>
-      </ul>
       <div class="card">
         <div class="card-body">
           <%= deslong %>

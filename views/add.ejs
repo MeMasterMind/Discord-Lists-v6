@@ -16,7 +16,7 @@
   <body>
     <u><center><h1>Add your bot</h1></center></u><br>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-    <form class="needs-validation" method="POST" action="/addbot/success" novalidate>
+    <form id="mainform"class="needs-validation" method="POST" action="/addbot/success" novalidate>
         <div class="col-md-4">
           <label for="validationCustom01" class="form-label">Bot's Client ID *</label>
           <input type="text" class="form-control" name="id" id="validationCustom01" placeholder="786125193394651166" required>
@@ -33,33 +33,33 @@
         </div><br>
         <div class="col-md-4">
             <label for="validationCustom01" class="form-label">Brief Description About Your Bot *</label>
-            <input type="text" class="form-control" name="short" id="validationCustom01" placeholder="A mulipurpose bot with lot of cool features" maxlength="40" required>
+            <input type="text" class="form-control" name="short" id="validationCustom01" placeholder="A mulipurpose bot." maxlength="40" required>
             <div class="invalid-feedback">
               You must type a small description about your bot
             </div>
         </div><br>
         <div class="col-md-4">
             <label for="validationCustom01" class="form-label">Detailed Description About Your Bot. *</label>
-            <textarea class="form-control" name="long" id="validationCustom01" placeholder="Description" minlength="300" required></textarea>
+            <textarea class="form-control" name="long" id="validationCustom01" placeholder="The old man was bent into a capital C, his head leaning so far forward that his beard nearly touched his knobby knees." minlength="300" required></textarea>
             <div class="invalid-feedback">
               Your description must exceed 300 character limit.
             </div>
         </div><br>
         <div class="col-md-4">
             <label for="validationCustom01" class="form-label">Website URL</label>
-            <input type="text" class="form-control" name="site" id="validationCustom01" placeholder="Website Link">
+            <input type="text" class="form-control" name="site" id="validationCustom01" placeholder="https://bot.com">
         </div><br>
         <div class="col-md-4">
             <label for="validationCustom01" class="form-label">GitHub URL</label>
-            <input type="text" class="form-control" name="github" id="validationCustom01" placeholder="GitHub Link">
+            <input type="text" class="form-control" name="github" id="validationCustom01" placeholder="github.com/dev/mybot">
         </div><br>
         <div class="col-md-4">
             <label for="validationCustom01" class="form-label">Support Server URL</label>
-            <input type="text" class="form-control" name="server" id="validationCustom01" placeholder="Support Server Link">
+            <input type="text" class="form-control" name="server" id="validationCustom01" placeholder="discord.gg/minecraft">
         </div><br>
         <div class="col-md-4">
             <label for="validationCustom01" class="form-label">Invite URL. *</label>
-            <input type="text" class="form-control" name="invite" id="validationCustom01" placeholder="Invite Link" required>
+            <input type="text" class="form-control" name="invite" id="validationCustom01" placeholder="discord.com/oath/blahblah" required>
         </div><br>
         <div class="col-12">
           <div class="form-check">
@@ -73,12 +73,11 @@
           </div>
         </div><br>
         <div class="col-12">
-          <button class="btn btn-primary" type="submit">Submit form</button>
+          <button class="button-main" type="submit">Submit form</button>
         </div><br>
         <h6>* = Required</h6>
       </form>
-  </body>
-</html>
+ <%- include('./templates/footer.ejs') %> 
 
 <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields

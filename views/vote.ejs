@@ -13,9 +13,9 @@
 
     <title>Discord Lists | Voting <%= botid.botname %></title>
   </head>
-  <body>
-      <center><h3>You're now voting for <%= botid.botname %> bot. You only can vote for 1 bot and you have to wait 12 hours cooldown for next vote. Choose the bot to vote wisely.</h3></center><br>
-      <center><img src="<%= botid.botimage %>" class="rounded" alt="..."></center>
+  <body><br>
+      <center><h3><font color="white">You're now voting for <%= botid.botname %> bot. Voting helps this bot to get more views</font></h3></center><br>
+      <center><img src="<%= botid.botavatar %>" class="rounded" alt="..."></center><br>
       <center><form class="needs-validation" method="POST" action="/bot/vote/<%= botid.botid %>">
         <div class="col-12">
           <button class="btn btn-primary" type="submit">Vote</button>

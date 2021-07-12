@@ -8,6 +8,7 @@ const parser = require('body-parser')
 const mongoose = require('mongoose')
 const addbot = require('./models/bots')
 const member = require('./models/users')
+const votes = require('./models/votes.js')
 const fetch = require('node-fetch')
 const Discord = require('discord.js')
 const client = new Discord.Client()
@@ -85,6 +86,20 @@ app.get('/', async function(req, res){
 
 app.get('/bots', (req,res)=>{
   res.redirect('/')
+})
+
+app.get('/bug', async function(req, res){
+        const login_logout = req.isAuthenticated()
+        const verified_bots = await addbot.find({ state: 'verified' }).limit(2)
+        const random_bot = await addbot.find({ state: 'verified' }).limit(1)
+        const certified_bots = await addbot.find({ certification: 'certified' })
+        console.log(random_bot)
+        res.render('bugs', {
+                verified_bots: verified_bots,
+                certified_bots: certified_bots,
+                random_bot: random_bot,
+                login_logout: login_logout
+        })
 })
 
 // Login with Discord
@@ -229,10 +244,10 @@ app.get('/bot/:botid', async function(req, res){
         const botid = await addbot.findOne({ botid: req.params.botid })
         if(!botid) return res.redirect('/error?code=404&message=invalid bot')
         const deslong = botid.longdes
-        res.render('bot',{
+        res.render('bot', {
                 botid: botid,
                 deslong: deslong,
-                login_logout
+                login_logout,
         })
 })
 
@@ -335,21 +350,35 @@ app.get('/bot/:botid/vote', checkAuth, async function(req, res) {
 
         const botid = await addbot.findOne({ botid: req.params.botid })
         res.render('vote', {
-                botid: botid
+                botid: botid,
+                login_logout: login_logout
         })
 })
 
 app.post('/bot/vote/:botid', checkAuth, async function(req, res) {
   const login_logout = req.isAuthenticated()
 
-        const user = await member.findOne({ username: `${req.user.username}#${req.user.discriminator}` })
-        const bot = await addbot.findOne({ botid: `${req.params.botid}` })
-        await user.findOneAndUpdate(
+        await votes.findOneAndUpdate(
                 {
-                       user: user.username 
+                        username: `${req.user.username}#${req.user.discriminator}`,
+                        botid: req.params.botid
                 },
-                { 
-                        votebot: `${bot}`
+                {
+                        $set:{
+                                date: Date.now(),
+                                ms:  43200000
+                        }
+                },
+                { upsert: true }
+        )
+        await addbot.findOneAndUpdate(
+                {
+                      botid: req.params.botid
+                },
+                {
+                      $set:{
+                              votes: 1
+                      }
                 }
         )
 })

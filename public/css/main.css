@@ -1,3 +1,8 @@
+:root {
+  --main-bg-color: #FC6B29;
+  --secondary: #232323;
+}
+
 body{
   background-image: url('/images/vertical.svg') ;
   color: #fff;
@@ -9,6 +14,11 @@ body{
 }
 .card:hover{
   cursor: default;
+}
+
+a, a:hover{
+  text-decoration: none;
+  color: #fff;
 }
 
 .heading{
@@ -23,31 +33,30 @@ body{
     transition: all 0.15s ease;
     box-shadow: none;
     color: #ffffff;
-  background: #ffa500;
+  background: var(--main-bg-color);
   border-width: 2px;
     border: none;
     position: relative;
     overflow: hidden;
     margin: 4px 1px;
-    border-radius: 10px !important;
+    border-radius: 4px !important;
     cursor: pointer;
-  width: 90px;
+    width: auto;
+    padding: 0px 30px 0px 30px;
   height: 40px;
   margin: 10px;
   outline:none;
-  border: none !important;
-    transition: all 0.15s ease;
-    box-shadow: none;
-    color: #ffffff;
   display: inline-block;
     font-weight: 400;
     text-align: center;
     vertical-align: middle;
     font-size: 17px;
     transition: 0.3s all;
+    text-decoration: none;
+
 }
 .button-main:hover{
-  transform: translateY(-10px)
+  filter: brightness(87%)
 }
 .main{
   display: flex;
@@ -115,7 +124,7 @@ transform: translate(10%,-110%)
   left: 0;
   width: 100%;
   height: 100%;
-  background: #ffa500;
+  background: var(--main-bg-color);
   clip-path: circle(150px at 80% 20%);
   transition: 0.5s ease-in-out;
 }
@@ -219,7 +228,7 @@ transform: translate(10%,-110%)
 }
 #menu li a:hover {
 	color: #FFFFFF;
-	background: #ffa500;
+	background: var(--main-bg-color);
 }
 #menu input {
 	display: none;
@@ -371,4 +380,48 @@ transform: translate(10%,-110%)
   #copyright{
     margin-right: 110px;
   }
+}
+
+hr{
+  margin-right: 100px;
+  margin-left: 100px;
+  height: 1.5px;
+}
+
+.top-img{
+  display: block;
+  margin: auto;
+  height: 306px;
+  width: 306px;
+}
+
+
+#bugformDIV{
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  flex-flow: row wrap;
+  padding: 30px;
+}
+
+form{
+color: white;
+display: flex;
+ flex-flow: column wrap;
+justify-content: center;
+ align-items: center;
+}
+
+/* Scrollbar */
+
+
+    body::-webkit-scrollbar {
+  width: 5px;               /* width of the entire scrollbar */
+}
+body::-webkit-scrollbar-track {
+  background: var(--secondary);        /* color of the tracking area */
+}
+body::-webkit-scrollbar-thumb {
+  background-color: var(--main-bg-color);    /* color of the scroll thumb */
+
 }
