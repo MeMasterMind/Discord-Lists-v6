@@ -1,3 +1,6 @@
+
+<img  align="center" src="https://cdn.glitch.com/1be813f1-4233-4b7a-bf44-8a562481d51f%2Flogo.png"  width="500" alt="Logo"  />
+
 # _Discord Lists V6_:
 
 We are glad to announce the release of V6 for Discord Lists!
