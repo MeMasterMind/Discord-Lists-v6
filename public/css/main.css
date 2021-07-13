@@ -30,7 +30,6 @@ a, a:hover{
   font-size: 35px;
 }
 .button-main{
-    transition: all 0.15s ease;
     box-shadow: none;
     color: #ffffff;
   background: var(--main-bg-color);
@@ -51,7 +50,6 @@ a, a:hover{
     text-align: center;
     vertical-align: middle;
     font-size: 17px;
-    transition: 0.3s all;
     text-decoration: none;
 
 }
@@ -380,6 +378,13 @@ transform: translate(10%,-110%)
   #copyright{
     margin-right: 110px;
   }
+  .marginadd{
+    margin-right: 110px;
+  }
+}
+
+.marginadd a:hover{
+  text-decoration: underline;
 }
 
 hr{
@@ -424,4 +429,68 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
   background-color: var(--main-bg-color);    /* color of the scroll thumb */
 
+}
+
+.cookie-popup {
+  
+  font-size: 0.875rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  position: fixed;
+  bottom: -6.25rem;
+  left: 1.25rem;
+  right: 1.25rem;
+  padding: 0.625rem 0.9375rem;
+  box-shadow: 0 0 0.625rem 0 rgba(0,0,0, .15);
+  line-height: 150%;
+  transition: opacity .5s;
+  opacity: 0;
+}
+.cookie-popup--short {
+  right: none;
+  width: 21.875rem; 
+}
+.cookie-popup--dark {
+  background: #000;
+  color: #fff;
+}
+.cookie-popup--not-accepted {
+  opacity: 1;
+  animation: cookie-popup-in .5s ease forwards;  
+}
+.cookie-popup--accepted {
+  opacity: 0;
+}
+.cookie-popup a {
+  color: skyblue;
+}
+.cookie-popup a:visited {
+  color: skyblue;
+  text-decoration: none;
+}
+.cookie-popup-actions {
+  flex: 1;
+  text-align: right;
+}
+.cookie-popup-actions button {
+  color: var(--main-bg-color);
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-style: inherit;
+  font-size: inherit;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 	0.75rem;
+  padding: 0;
+  cursor: pointer;
+}
+.cookie-popup-actions button:hover {
+  text-decoration: underline;
+}
+
+@keyframes cookie-popup-in {
+  from { bottom: -6.25rem; }
+  to { bottom: 1.25rem; }
 }

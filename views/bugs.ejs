@@ -2,7 +2,7 @@
  <%- include('./templates/nav.ejs') %> 
 <br><Br><Br><Br>
 <H1> Bug Reports <H1>
-<p style="padding:30px">Found a Vulnerability? Bug? Something unexpected? Report here! Make sure to join our Discord. We will respond as soon as we can. In case of any issues, contact a staff or a mod, they will assist you.</p>
+<p style="padding:100px">Found a Vulnerability? Bug? Something unexpected? Report here! Make sure to join our Discord. We will respond as soon as we can. In case of any issues, contact a staff or a mod, they will assist you.</p>
 <br>
 
 <form onsubmit=reportBug() id="bugform">
@@ -31,11 +31,11 @@ request.setRequestHeader('Content-type', 'application/json');
 
 var myEmbed = {
   author: {
-    name: "Bug Reported"
+    name: "Bug"
   },
-  title: "bugTitle",
-  description: "bugDesc",
-  color: hexToDecimal("#ff0000")
+  title: bugTitle,
+  description: bugDesc,
+  color: hexToDecimal("#FC6B29")
 }
 
 var params = {

@@ -88,6 +88,10 @@ app.get('/bots', (req,res)=>{
   res.redirect('/')
 })
 
+app.get('/twitter', (req,res)=>{
+  res.redirect("https://twitter.com/discordlists100");
+})
+
 app.get('/bug', async function(req, res){
         const login_logout = req.isAuthenticated()
         const verified_bots = await addbot.find({ state: 'verified' }).limit(2)
