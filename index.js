@@ -380,7 +380,7 @@ app.post('/bot/vote/:botid', checkAuth, async function(req, res) {
                       botid: req.params.botid
                 },
                 {
-                      $set:{
+                      $inc:{
                               votes: 1
                       }
                 }

@@ -18,8 +18,8 @@
   <body><br><br><br>
     <center><img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>" class="rounded" alt="..."></center>
     <center><h1><%= user.username %>#<%= user.discriminator %></h1></center><br>
-    <center><button class="button-main"><a   href="/addbot" role="button">Add Bot</a></button></center><br><br>
-    <center><button class="button-main"><a   href="/" role ="button">Return Home</a></button></center><br><br>
+    <center><a   href="/addbot"><button class="button-main">Add Bot</button></a></center><br><br>
+    <center><a   href="/"><button class="button-main">Return Home</button></a></center><br><br>
     <div class="row row-cols-1 row-cols-md-2 g-4">
       <% bots.forEach(function(bot) { %>
     <div class="col">
@@ -28,9 +28,9 @@
         <img src="<%= bot.botavatar %>"><br>
           <h3 class="card-title"><%= bot.botname %></h3>
           <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button class="button-main"><a href="/bot/<%= bot.botid %>" class="btn btn-primary active" role="button" data-bs-toggle="button" aria-pressed="true">View</a></button>
-            <button class="button-main"><a href="/bot/<%= bot.botid %>/edit" class="btn btn-primary active" role="button" data-bs-toggle="button" aria-pressed="true">Edit</a></button>
-            <button class="button-main"><a href="/bot/<%= bot.botid %>/delete" class="btn btn-primary active" role="button" data-bs-toggle="button" aria-pressed="true">Delete</a></button></div>
+            <a href="/bot/<%= bot.botid %>"><button class="button-main">View</button></a>
+            <a href="/bot/<%= bot.botid %>/edit" ><button class="button-main">Edit</button></a>
+           <a href="/bot/<%= bot.botid %>/delete" > <button class="button-main">Delete</button></a></div>
         </div>
       </div>
     </div>

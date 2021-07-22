@@ -5,14 +5,15 @@
     width: auto;
     height: 58px;
 "></a></li>
+    <li><a href='/'>Home</a></li>
     <li><a href='/user/@me'>Profile</a></li>
     <li><a href='/bots'>Bots</a></li>
     <li><a href='/bots'>Search</a></li>
     <li><a href='/invite'>Discord</a></li>
     <% if(login_logout){ %>
-          <li style="float:right; margin-right:30px"><a href='/logout'>Logout</a></li>
+          <li class="login_logout"><a href='/logout'>Logout</a></li>
           <% } else{ %>  
-          <li style="float:right; margin-right:30px"><a href='/login'>Login</a></li>
+          <li class="login_logout"><a href='/login'>Login</a></li>
    <% } %>
   </ul>
 </nav>
@@ -21,7 +22,7 @@
 <div class="cookie-popup cookie-popup--short cookie-popup--dark">
     
     <div>
-    This website uses cookies to provide you with a great user experience. By using it, you accept our <a href="https://github.com/discord-lists/privacy-Policy" target="_blank">use of cookies</a>
+    This website uses cookies to provide you with a great user experience. By using it, you accept our <a href="https://github.com/Discord-Lists/Cookie-Policy" target="_blank">use of cookies</a>
     </div>
     <div class="cookie-popup-actions">
       <button>Okay</button>

@@ -74,7 +74,7 @@ const bot = new mongoose.Schema({
         required: true
     },
     votes: {
-        type: String,
+        type: Number,
         required: true
     }
 })
