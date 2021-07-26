@@ -157,6 +157,14 @@ app.get('/partners', function(req, res){
         })
 })
 
+//Staff Panel:
+app.get('/staffpanel', function(req, res){
+        const login_logout = req.isAuthenticated()
+        res.render('staff-panel',
+          login_logout
+        )
+})
+
 // Redirecting...
 app.get('/edit/success', function(req, res){
         const login_logout = req.isAuthenticated()
@@ -560,3 +568,8 @@ client.on('message', async message => {
 })
 
 client.login(config.token)
+
+
+app.use(function (req, res, next) {
+  res.status(404).render("404")
+})

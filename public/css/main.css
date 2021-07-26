@@ -51,10 +51,11 @@ a, a:hover{
     vertical-align: middle;
     font-size: 17px;
     text-decoration: none;
+		transition: all 1s;
 
 }
 .button-main:hover{
-  filter: brightness(87%)
+  filter: brightness(87%);
 }
 .main{
   display: flex;
@@ -97,7 +98,7 @@ p{
   position: relative; 
   width: 350px;
   height: 420px;
-  background: #232323;
+  background: var(--secondary);
   border-radius: 20px;
   overflow: visible;
   margin-left: 70px;
@@ -193,7 +194,7 @@ transform: translate(10%,-110%)
 
 
 #menu {
-	background: #232323;
+	background: var(--secondary);
 	color: #FFF;
 	height: 56px;
 	padding-left: 18px;
@@ -253,7 +254,7 @@ transform: translate(10%,-110%)
 	height: auto;
 	overflow: hidden;
 	width: 170px;
-	background: #232323;
+	background: var(--secondary);
 	position: absolute;
 	z-index: 99;
 	display: none;
@@ -298,7 +299,7 @@ footer a{
 
 .footer-distributed {
   color:#fff;
-  background-color: #232323;
+  background-color: var(--secondary);
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
   box-sizing: border-box;
   width: 100%;
@@ -540,7 +541,7 @@ a:hover{
     top: 20px;
     left: 12px;
     font-size: 16px;
-    color: #232323;
+    color: var(--secondary);
     font-weight: 500;
     transform-origin: 0 0;
     transform: translate3d(0, 0, 0);
@@ -552,7 +553,7 @@ a:hover{
     left: 0;
     width: 100%;
     height: 100%;
-    background: #232323;
+    background: var(--secondary);
     z-index: -1;
     transform: scaleX(0);
     transform-origin: left; }
@@ -566,18 +567,18 @@ a:hover{
     height: 56px;
     font-size: 16px;
     font-weight: 400;
-    background: #232323;
-    box-shadow: inset 0 -1px 0 #232323;
-    color: #232323;
+    background: var(--secondary);
+    box-shadow: inset 0 -1px 0 var(--secondary);
+    color: var(--secondary);
     transition: all .15s ease; }
     .inp input:hover {
-      background: #232323;
-      box-shadow: inset 0 -1px 0 #232323; }
+      background: var(--secondary);
+      box-shadow: inset 0 -1px 0 var(--secondary); }
     .inp input:not(:placeholder-shown) + .label {
-      color: #232323;
+      color: var(--secondary);
       transform: translate3d(0, -12px, 0) scale(0.75); }
     .inp input:focus {
-      background: #232323;
+      background: var(--secondary);
       outline: none;
       box-shadow: inset 0 -2px 0 #FC6B29; }
       .inp input:focus + .label {
@@ -591,4 +592,11 @@ a:hover{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.center-block{
+  /* this useless CSS class was added becuase the above class didnt seem to be working at some places.*/
+
+  display: block;
+  margin: auto;
 }

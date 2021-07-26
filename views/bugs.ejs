@@ -9,6 +9,7 @@
 <div id="bugformDIV">
 <input id="bugTitle" placeholder="Title" type="text" class="form-input"required></input>
 <input id="bugDesc" placeholder="Description" type="text" class="form-input" required></input>
+<input id="userIDandTag" placeholder="Your Discord ID and Tag" type="text" class="form-input" required>
 </div><br>
 <input type="submit" class="button-main" style="transform: translate(0, -50px);"></input>
 </form>
@@ -23,7 +24,7 @@ bugform.addEventListener("submit", event=>{event.preventDefault()})
 function reportBug(){
 var bugTitle = document.getElementById("bugTitle").value
 var bugDesc = document.getElementById("bugDesc").value
-
+var userIDandTag = document.getElementById("userIDandTag").value
 var webURL = "https://discord.com/api/webhooks/863973548632178719/AnkWzM61kCkuV76vmLwcdRVjyi3LrW9u7tJkgIHWfPb8c7PyIPOIGxp1In1KZhOgpUcu"
 var request = new XMLHttpRequest();
 request.open("POST", webURL);
@@ -32,7 +33,7 @@ request.setRequestHeader('Content-type', 'application/json');
 
 var myEmbed = {
   author: {
-    name: "Bug"
+    name: userIDandTag
   },
   title: bugTitle,
   description: bugDesc,

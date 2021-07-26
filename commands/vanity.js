@@ -4,7 +4,7 @@ module.exports = {
     name:'vanity',
     description: 'Create a vanity URL for the bot',
 
-    async execut(client, message, args){
+    async execute(client, message, args){
         if(!args[0]){
             message.channel.send({
                 embed:{
