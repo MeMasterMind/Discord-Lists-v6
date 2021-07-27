@@ -1,0 +1,8 @@
+/* Mobile */
+
+@media only screen and (max-width: 450px){
+  .card{
+    margin-left: 0 !important;
+    margin: 30px;
+  }
+}
