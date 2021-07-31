@@ -40,7 +40,7 @@
         </div><br>
         <div class="col-md-4">
             <label for="validationCustom01" class="form-label">Detailed Description About Your Bot. *</label>
-            <textarea class="form-control" name="long" id="validationCustom01" placeholder="The old man was bent into a capital C, his head leaning so far forward that his beard nearly touched his knobby knees." minlength="300" required></textarea>
+            <textarea style="white-space:pre;" class="form-control" name="long" id="validationCustom01" placeholder="The old man was bent into a capital C, his head leaning so far forward that his beard nearly touched his knobby knees." minlength="300" required></textarea>
             <div class="invalid-feedback">
               Your description must exceed 300 character limit.
             </div>
@@ -64,6 +64,18 @@
         <div class="col-12" style="
     display: flex;
     justify-content: center;">
+		<p class="tag-area">
+					<label class="col-lg-12">Tags</label>
+					<select id="tags" class="input col-lg-12">
+						<option hidden value="">Select One</option>
+						<option value="">Moderation</option>
+						<option value="">Utility</option>
+						<option value="">Fun</option>
+					</select>
+					<script defer>
+						jQuery("#tags">.val("<?= newsPost.tags ?>")
+					</script>
+					</p><br><br>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
             <label class="form-check-label" for="invalidCheck">

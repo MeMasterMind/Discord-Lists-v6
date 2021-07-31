@@ -14,6 +14,7 @@
      <% if(certified_bots.length === 0){ %>
         <h3>No Certified Bots found. Please visit us later.</h3>
       <% } else{ %>
+      <div class="center-flex">
       <% certified_bots.forEach(function(bot) { %>
     <div class="container">
       <div class="card">
@@ -27,8 +28,8 @@
         </div>
       </div>
     </div>
-    <br><Br>
               <% }); %>
+              </div>
      <% } %>
 
 <br><br><br><br><br>
@@ -36,6 +37,7 @@
      <% if(verified_bots.length === 0){ %>
         <h3>No Bots found. Please visit us later.</h3>
       <% } else{ %>
+      <div class="center-flex">
       <% verified_bots.forEach(function(bot) { %>
     <div class="container">
       <div class="card">
@@ -51,14 +53,15 @@
         </div>
       </div>
     </div>
-    <br><Br>
               <% }); %>
+              </div>
      <% } %>
 <br><br><br><br><br>
     <h2 class="heading">Random Bots</h2><br><br>
      <% if(random_bot.length === 0){ %>
         <h3>No Bots found. Please visit us later.</h3>
       <% } else{ %>
+      <div class="center-flex">
       <% random_bot.forEach(function(random) { %>
     <div class="container">
       <div class="card">
@@ -73,8 +76,9 @@
           <a href="<%= random.invite %>" class="invitebot"><button class="button-main">Invite</button></a>
         </div>
        </div>
-      </div><br><Br>
+      </div>
       <% }); %>
+      </div>
      <% } %>
 
 <br><br><br><br><hr><br>

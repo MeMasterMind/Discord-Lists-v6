@@ -1,13 +1,12 @@
 :root {
-  --main-bg-color: #FC6B29;
+  --main-bg-color:#FC6B29;
   --secondary: #232323;
 }
 
 body{
   background-image: url('/images/vertical.svg') ;
   color: #fff;
-  font-family: 'Roboto', sans-serif !important;
-}
+  font-family: 'Poppins', sans-serif;}
 
 .card{
   background:#000000 ;
@@ -51,8 +50,18 @@ a, a:hover{
     vertical-align: middle;
     font-size: 17px;
     text-decoration: none;
-		transition: all 1s;
+		transition: all 0.1s;
 
+}
+#button_login{
+  margin: 10px;
+  box-shadow: none;
+  color: #ffffff;
+  background: var(--main-bg-color);
+}
+#button_login:hover{
+  color: var(--secondary) !important;
+  text-decoration: none !important;
 }
 .button-main:hover{
   filter: brightness(87%);
@@ -92,6 +101,9 @@ p{
   display:flex;
   align-items:center;
   justify-content:center;
+  width: 100%;
+  flex-basis: 33.333333%;
+  margin: 30px;
 }
 
 .container .card{
@@ -101,7 +113,7 @@ p{
   background: var(--secondary);
   border-radius: 20px;
   overflow: visible;
-  margin-left: 70px;
+  margin-right: 6px;
 }
 
 .invitebot{
@@ -196,7 +208,7 @@ transform: translate(10%,-110%)
 #menu {
 	background: var(--secondary);
 	color: #FFF;
-	height: 56px;
+	height: 60px;
 	padding-left: 18px;
 	border-radius: 0px;
 }
@@ -210,8 +222,10 @@ transform: translate(10%,-110%)
 }
 #menu li {
 	float: left;
-	display: inline;
 	position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
 }
 #menu a {
 	display: block;
@@ -225,10 +239,10 @@ transform: translate(10%,-110%)
 	content: "\25BE";
 	margin-left: 5px;
 }
-#menu li a:hover {
-	color: #FFFFFF;
-	background: var(--main-bg-color);
+#menu li a:hover, #menu i {
+	color: var(--main-bg-color);
 }
+
 #menu input {
 	display: none;
 	margin: 0;
@@ -279,7 +293,6 @@ transform: translate(10%,-110%)
 	#menu ul {background:#111;position:absolute;top:100%;right:0;left:0;z-index:3;height:auto;display:none}
 	#menu ul.sub-menus {width:100%;position:static;}
 	#menu ul.sub-menus a {padding-left:30px;}
-	#menu li {display:block;float:none;width:auto;}
 	#menu input, #menu label {position:absolute;top:0;left:0;display:block}
 	#menu input {z-index:4}
 	#menu input:checked + label {color:white}
@@ -592,6 +605,7 @@ a:hover{
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .center-block{
@@ -600,3 +614,4 @@ a:hover{
   display: block;
   margin: auto;
 }
+

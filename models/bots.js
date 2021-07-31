@@ -76,7 +76,11 @@ const bot = new mongoose.Schema({
     votes: {
         type: Number,
         required: true
-    }
+    },
+		tags: {
+			type: String,
+			required: true
+		}
 })
 
 module.exports = mongoose.model('bots', bot);

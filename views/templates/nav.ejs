@@ -1,17 +1,19 @@
 <nav id='menu'>
   <input type='checkbox' id='responsive-menu' onclick='updatemenu()'><label></label>
+  <script src="https://kit.fontawesome.com/e52f50d2d7.js" crossorigin="anonymous"></script>
   <ul>
     <li><a href="/"><img src="https://cdn.glitch.com/1be813f1-4233-4b7a-bf44-8a562481d51f%2Flogo.png?" style="
     width: auto;
-    height: 58px;
+    height: 60px;
 "></a></li>
-    <li><a href='/'>Home</a></li>
-    <li><a href='/user/@me'>Profile</a></li>
-    <li><a href='/invite'>Discord</a></li>
+    <li><i class="fas fa-home"></i><a href='/'> Home</a></li>
+    <li><i class="fas fa-user"></i><a href='/user/@me'> Profile</a></li>
+    <li><i class="fas fa-users"></i><a  href='/invite'> Discord</a></li>
     <% if(login_logout){ %>
-          <li class="login_logout"><a href='/logout'>Logout</a></li>
+          <li class=""><a href='/logout'>Logout</a></li>
           <% } else{ %>  
-          <li class="login_logout"><a href='/login'>Login</a></li>
+        
+          <li class="login_logout" id="button_login"><a href='/login'>Login</a></li>
    <% } %>
   </ul>
 </nav>

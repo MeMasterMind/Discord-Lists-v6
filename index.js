@@ -14,7 +14,7 @@ const Discord = require('discord.js')
 const client = new Discord.Client()
 const config = require('./config.json')
 const PORT = process.env.PORT || 3000 //i changed the port to 3000 since 5000 was causing errors
-
+//
 /*
 * @param1 {string}: Required, message text in String format.
 * 
@@ -75,7 +75,7 @@ app.get('/', async function(req, res){
         const verified_bots = await addbot.find({ state: 'verified' }).limit(2)
         const random_bot = await addbot.find({ state: 'verified' }).limit(1)
         const certified_bots = await addbot.find({ certification: 'certified' })
-        console.log(random_bot)
+        
         res.render('index', {
                 verified_bots: verified_bots,
                 certified_bots: certified_bots,
@@ -97,7 +97,6 @@ app.get('/bug', async function(req, res){
         const verified_bots = await addbot.find({ state: 'verified' }).limit(2)
         const random_bot = await addbot.find({ state: 'verified' }).limit(1)
         const certified_bots = await addbot.find({ certification: 'certified' })
-        console.log(random_bot)
         res.render('bugs', {
                 verified_bots: verified_bots,
                 certified_bots: certified_bots,
@@ -158,11 +157,39 @@ app.get('/partners', function(req, res){
 })
 
 //Staff Panel:
-app.get('/staffpanel', function(req, res){
+app.get('/staffpanel', async function(req, res){
         const login_logout = req.isAuthenticated()
-        res.render('staff-panel',
-          login_logout
-        )
+        const unverifiedBot = await addbot.find({state: "unverified"})
+        console.log(unverifiedBot)
+        res.render('staff-panel',{
+          login_logout, unverifiedBot})
+})
+
+app.post("/staffAccept/:id", async (req,res)=>{
+          //    await addbot.findOneAndUpdate(
+          //          {
+          //               botname: data.username
+          //          },
+          //          {
+          //               botid: data.id,
+          //               botavatar: `${avatar}`,
+          //               shortdes: req.body.short,
+          //               longdes: req.body.long,
+          //               botprefix: req.body.prefix,
+          //               bottoken: `botzer` + makeAPI(30),
+          //               botowner: `${userinfo.username}#${userinfo.discriminator}`,
+          //               ownerid: `${userinfo.id}`,
+          //               invite: req.body.invite,
+          //               support: req.body.server,
+          //               site: req.body.site,
+          //               github: req.body.github,
+          //               state: 'unverified',
+          //               certification: 'uncertified',
+          //               servercount: 'N/A',
+          //               vanity: ''
+          //          },
+          //          { upsert: true }
+          //  )
 })
 
 // Redirecting...

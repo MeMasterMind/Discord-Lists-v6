@@ -68,8 +68,36 @@
       <div class="flex justify-center">
         <a><button class="button-main">Vote</button></a>
         <a href="<%=botid.invite%>" class="underline"><button class="button-main" style="background:none !important ;color:var(--main-bg-color);font-weight:bold;">Invite</button></a>
+
       </div>
     </div>
   </div>
 </section>
+         <% if(botid.state === 'unverified'){ %>
+         <Br><br><br>
+         <button class="button-main" onclick="acceptBot()" style="background:#1FD78D">Accept</button><Br><Br>
+         <button class="button-main" onclick="denyBot()" style="background: #F62451
+">Deny</button>         
+         <% }%>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+function acceptBot(){
+Swal.fire(
+  'Accept Bot and add it to the list?',
+  'Are you sure?',
+  'question'
+).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire('Alright then!', 'Bot Accepted.', 'success')
+  } 
+})
+}
+function denyBot(){
+Swal.fire(
+  'Deny bot and permanently delete?',
+  'Are you sure?',
+  'question'
+)
+}
+</script>
        <%- include('./templates/footer.ejs') %>
