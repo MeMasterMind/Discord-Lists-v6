@@ -4,24 +4,30 @@
       {
         "id": "7682f120-5e08-46b4-becb-5c5410dc0303",
         "line": 99,
-        "version": 3015,
-        "index": 3627
+        "version": 3079,
+        "index": 3609
       }
     ],
     "public/css/main.css": [
       {
         "id": "91b05c06-989f-4d9a-878b-120b64646c81",
-        "line": 297,
-        "version": 1921,
-        "index": 5042
+        "line": 304,
+        "version": 1936,
+        "index": 5138
       }
     ],
     "views/bot.ejs": [
       {
         "id": "a8f25243-089c-41d5-9172-21e8269c4f33",
-        "line": 87,
-        "version": 1352,
-        "index": 4833
+        "line": 76,
+        "version": 1353,
+        "index": 4370
+      },
+      {
+        "id": "528d0daa-8639-4905-81af-7e1c7672b458",
+        "line": 78,
+        "version": 1353,
+        "index": 4334
       }
     ]
   }

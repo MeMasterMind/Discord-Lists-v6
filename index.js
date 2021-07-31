@@ -72,8 +72,8 @@ app.use(passport.session()) // Using session
 // Main Page
 app.get('/', async function(req, res){
         const login_logout = req.isAuthenticated()
-        const verified_bots = await addbot.find({ state: 'verified' }).limit(2)
-        const random_bot = await addbot.find({ state: 'verified' }).limit(1)
+        const verified_bots = await addbot.find({ state: 'verified' })
+        const random_bot = await addbot.find({ state: 'verified' })
         const certified_bots = await addbot.find({ certification: 'certified' })
         
         res.render('index', {
@@ -160,36 +160,35 @@ app.get('/partners', function(req, res){
 app.get('/staffpanel', async function(req, res){
         const login_logout = req.isAuthenticated()
         const unverifiedBot = await addbot.find({state: "unverified"})
-        console.log(unverifiedBot)
+       
         res.render('staff-panel',{
           login_logout, unverifiedBot})
 })
+//Accept bot from StaffPanel
+app.get("/staffpanel/accept/:id", async (req,res)=>{
+  const ID = req.params.id
+             await addbot.findOneAndUpdate(
+                   {
+                        botid: ID
+                   },
+                   {
+                      state: 'verified'
+                   },
+                   { upsert: true }
+           ).then(res.redirect("/staffpanel"))
+           .catch(err=>{
+             res.redirect("/error")
+           }           
+           )
+})
 
-app.post("/staffAccept/:id", async (req,res)=>{
-          //    await addbot.findOneAndUpdate(
-          //          {
-          //               botname: data.username
-          //          },
-          //          {
-          //               botid: data.id,
-          //               botavatar: `${avatar}`,
-          //               shortdes: req.body.short,
-          //               longdes: req.body.long,
-          //               botprefix: req.body.prefix,
-          //               bottoken: `botzer` + makeAPI(30),
-          //               botowner: `${userinfo.username}#${userinfo.discriminator}`,
-          //               ownerid: `${userinfo.id}`,
-          //               invite: req.body.invite,
-          //               support: req.body.server,
-          //               site: req.body.site,
-          //               github: req.body.github,
-          //               state: 'unverified',
-          //               certification: 'uncertified',
-          //               servercount: 'N/A',
-          //               vanity: ''
-          //          },
-          //          { upsert: true }
-          //  )
+//Deny and Delete not drom Staffpanel
+
+app.get("/staffpanel/accept/:id", async (req,res)=>{
+  const ID = req.params.id
+  await addbot.findOneAndRemove({
+    botid: ID
+  }).then(res.redirect("/staffpanel"))
 })
 
 // Redirecting...

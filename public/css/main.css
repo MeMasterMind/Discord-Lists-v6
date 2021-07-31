@@ -3,6 +3,13 @@
   --secondary: #232323;
 }
 
+.main-bg{
+  background: var(--main-bg-color)
+}
+
+.secondary-bg{
+  background: var(--secondary)
+}
 body{
   background-image: url('/images/vertical.svg') ;
   color: #fff;
