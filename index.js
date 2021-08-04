@@ -13,8 +13,9 @@ const fetch = require('node-fetch')
 const Discord = require('discord.js')
 const client = new Discord.Client()
 const config = require('./config.json')
+const websiteURL = "https://a-botlist-without-a-name.crazybotboy.repl.co"
 const PORT = process.env.PORT || 3000 //i changed the port to 3000 since 5000 was causing errors
-//
+//ok
 /*
 * @param1 {string}: Required, message text in String format.
 * 
@@ -66,11 +67,42 @@ app.use(session({
         saveUninitialized: false
 }));
 
+ 
+
+
 app.use(passport.initialize()) // Using passport
 app.use(passport.session()) // Using session
 
+
+
+
+
 // Main Page
-app.get('/', async function(req, res){
+app.get('/', (req, res) => {
+  const reject = () => {
+    res.setHeader('www-authenticate', 'Basic')
+    res.sendStatus(401)
+  }
+
+  const authorization = req.headers.authorization
+
+  if(!authorization) {
+    return reject() 
+  }
+
+  const [username, password] = Buffer.from(authorization.replace('Basic ', ''), 'base64').toString().split(':')
+
+  if(! (username === 'dlistsbeta' && password === 'discordlists100')) {
+    return reject()
+  }
+
+          res.render('beta')
+
+})
+
+
+
+app.get('/main', async function(req, res){
         const login_logout = req.isAuthenticated()
         const verified_bots = await addbot.find({ state: 'verified' })
         const random_bot = await addbot.find({ state: 'verified' })
@@ -92,6 +124,10 @@ app.get('/twitter', (req,res)=>{
   res.redirect("https://twitter.com/discordlists100");
 })
 
+app.get('/discord', (req,res)=>{
+	res.redirect("https://discord.gg/y8jrXrVNhn")
+})
+
 app.get('/bug', async function(req, res){
         const login_logout = req.isAuthenticated()
         const verified_bots = await addbot.find({ state: 'verified' }).limit(2)
@@ -104,6 +140,12 @@ app.get('/bug', async function(req, res){
                 login_logout: login_logout
         })
 })
+
+app.get('/beta', async function(req, res){
+     
+        res.render('beta')
+})
+
 
 // Login with Discord
 app.get('/login', passport.authenticate('discord', { scope: scopes, prompt: prompt }), function(req, res) {})
@@ -155,6 +197,8 @@ app.get('/partners', function(req, res){
           login_logout
         })
 })
+// 
+
 
 //Staff Panel:
 app.get('/staffpanel', async function(req, res){
@@ -163,7 +207,8 @@ app.get('/staffpanel', async function(req, res){
        
         res.render('staff-panel',{
           login_logout, unverifiedBot})
-})
+}) 
+
 //Accept bot from StaffPanel
 app.get("/staffpanel/accept/:id", async (req,res)=>{
   const ID = req.params.id
@@ -272,6 +317,7 @@ app.post('/addbot/success', checkAuth, async function(req, res){
         )
            res.redirect('/bot/' + data.id)
            console.log(data)
+           client.channels.cache.get('869945590686027825').send("BOT ADDED: <@"+data.id+">"+". [Invite]("+req.body.invite+") BY: "+ userinfo.username+userinfo.discriminator+ "  <@869945590115622946>"+"\n \n  ")
     })()
 })
 
@@ -325,7 +371,8 @@ app.post('/botedit/success/:botid', checkAuth, async function(req, res){
                                 github: req.body.github,
                            }
         )
-        res.redirect('/bot/' + req.params.botid)
+        client.channels.cache.get('869945590686027825').send(req.user.username+"#"+req.user.discriminator+" Has updated their bot. ("+websiteURL+"/bot/"+req.params.botid+")")
+        res.redirect('/bot/' + req.params.botid+"\n \n  ")
 })
 
 // Redirecting...
@@ -479,17 +526,9 @@ app.get('/github', async function(req, res){
   res.redirect('https://github.com/Discord-Lists')
 })
 //Partnerships: 
-//Pages:
-app.get('/partners/page/crazytech', async function(req, res){
-    res.render('partnerships/crazytech-development')
-})
-//Redirecting:
-app.get('/partners/invite/crazytech', async function(req, res){
-  res.redirect('https://discord.gg/DD4QG65H6V')
-})
 // API
 app.get('/api', function(req, res) {
-        res.json({"code": "200", "message": "api endpoint"})
+        res.redirect('https://a-botlist-without-a-name.crazybotboy.repl.co/404')
 })
 
 app.post('/api/:botid/stats', async function(req, res) {
@@ -555,7 +594,8 @@ function makeAPI(length) {
 app.listen(PORT, async function(err){
         await mongoose.connect('mongodb+srv://Admin:Admin1234@new-bot-list.w0s2g.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
                 useNewUrlParser: true,
-                useUnifiedTopology: true
+                useUnifiedTopology: true,
+                 useFindAndModify: false,
         }).then(console.log('Successfully connected to the mongoDB database'))
         if(err) console.error(err)
         console.log('Listening at https://localhost:5000')

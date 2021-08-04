@@ -29,7 +29,7 @@ module.exports = {
             message.channel.send({
                 embed:{
                     color:'RED',
-                    description: `Our system recognized that you are not the owner of this bot.`
+                    description: `You are not the owner of this bot.`
                 }
             })
             return

@@ -67,7 +67,7 @@ a, a:hover{
   background: var(--main-bg-color);
 }
 #button_login:hover{
-  color: var(--secondary) !important;
+  color: none !important;
   text-decoration: none !important;
 }
 .button-main:hover{
@@ -246,7 +246,7 @@ transform: translate(10%,-110%)
 	content: "\25BE";
 	margin-left: 5px;
 }
-#menu li a:hover, #menu i {
+#menu li:not(.login_logout) a:hover, #menu i {
 	color: var(--main-bg-color);
 }
 
@@ -622,3 +622,6 @@ a:hover{
   margin: auto;
 }
 
+.bot-misc-links{
+  font-size: 26px;
+}

@@ -37,39 +37,54 @@
         </div>
       </div>
     <% } %>
-      <center><h1><%= botid.botname %>&nbsp;<% if(botid.certification === 'certified') { %><img src="https://cdn.glitch.com/1be813f1-4233-4b7a-bf44-8a562481d51f%2FCertified.png?v=1625404757585" height="45" width="45"><% } %></h1></center>
-      <img src='<%= botid.botavatar %>' class="rounded mx-auto d-block" alt="..."><br>
-      <center>
-      <p class="fw-bold">Prefix: <%= botid.botprefix %></p>
-      <p class="fw-bold">Bot Invite: <a href="<%= botid.invite %>">Invite</a></p>
-      <p class="fw-bold">Owner: <%= botid.botowner %></p>
-      <p class="fw-bold">Server Count: <%= botid.servercount %></p>
-      <% if(botid.github){ %>
-        <p class="fw-bold">Github: <a href="<%= botid.github %>">Take Me There!</a></p>
-      <% } %>
-      <% if(botid.site){ %>
-        <p class="fw-bold">Website: <a href="<%= botid.site %>">Take Me There!</a></p>
-      <% } %>
-      <% if(botid.support){ %>
-        <p class="fw-bold">Support For Bot: <a href="<%= botid.support %>">Take Me There!</a></p><br>
-      <% } %>
-      <div class="card">
-        <div class="card-body">
-          <%= deslong %>
-        </div>
-      </div><br><br><br>
 
       <section class="text-gray-600 body-font">
   <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
     <img alt="hero" src="<%=botid.botavatar%>">
     <div class="text-center lg:w-2/3 w-full">
       <h1 class="flex justify-center title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900"><%=botid.botname%><% if(botid.certification === 'certified') { %><img src="https://cdn.glitch.com/1be813f1-4233-4b7a-bf44-8a562481d51f%2FCertified.png?v=1625404757585" height="45" width="60"><% } %></h1>
+      <span class="font-bold text-2xl" style="color: var(--main-bg-color);">Prefix : <%=botid.botprefix%></span>
+      <br><br>
       <p class="mb-8 leading-relaxed"><%=deslong%></p>
       <div class="flex justify-center">
         <a><button class="button-main">Vote</button></a>
         <a href="<%=botid.invite%>" class="underline"><button class="button-main" style="background:none !important ;color:var(--main-bg-color);font-weight:bold;">Invite</button></a>
 
+      </div><br><br>
+
+
+    <div class="bot-misc-links">
+
+    <%if(botid.site){%>
+      <div class="center-flex">
+        <a href="<%=botid.site%>" rel="noopener noreffer" target="_blank" class="center-flex">
+        <i class="fas fa-link" aria-hidden="true" style=" margin: 5px;">
+        </i><p>Website</p>
+        </a>
       </div>
+    <% } %>
+
+        <%if(botid.github){%>
+      <div class="center-flex">
+        <a href="<%=botid.github%>" rel="noopener noreffer" target="_blank" class="center-flex">
+        <i class="fab fa-github" aria-hidden="true" style=" margin: 5px;">
+        </i><p>Github</p>
+        </a>
+      </div>
+    <% } %>
+
+    <%if(botid.support){%>
+      <div class="center-flex">
+        <a href="<%=botid.support%>" rel="noopener noreffer" target="_blank" class="center-flex">
+        <i class="fas fa-comment-dots" aria-hidden="true" style=" margin: 5px;">
+        </i><p>Support</p>
+        </a>
+      </div>
+    <% } %>
+    </div>
+      <br><br>
+      <p class="fw-bold">Owner: <%= botid.botowner %></p>
+      <p class="fw-bold">Server Count: <%= botid.servercount %></p>
     </div>
   </div>
 </section>
