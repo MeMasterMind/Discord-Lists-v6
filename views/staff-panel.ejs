@@ -48,6 +48,7 @@
       <br>
       <p><%=bot.shortdes%></p>
        <span id="botID" style="display:none !important"><%=bot.botid%></span>
+       <span id="botname" style="display:none !important"><%=bot.botname%></span>
         <div class="center-flex">
         <button class="button-main" onclick="window.location.href = '/bot/<%=bot.botid%>'">View</button>
          <button class="button-main" onclick="acceptBot()" style="background:#1FD78D">Accept</button><Br><Br>
@@ -63,6 +64,8 @@
 
 <script>
 const ID= document.getElementById("botID").innerHTML
+const botname = document.getElementById("botname").innerHTML
+
 function acceptBot(){
 Swal.fire(
   'Accept Bot and add it to the list?',
@@ -78,10 +81,19 @@ Swal.fire(
 }
 function denyBot(){
 Swal.fire(
-  'Deny bot and permanently delete?',
+  'Deny Bot?',
   'Are you sure?',
   'question'
-)
+).then((result) => {
+  if (result.isConfirmed) {
+  fetch("/staffpanel/delete/" + ID, {
+  method: "POST",
+})
+    Swal.fire('Bot Deleted.', '', 'success')
+        window.location.reload()
+  } 
+})
+
 }
 </script>
 <div style="height:100vh"></div>

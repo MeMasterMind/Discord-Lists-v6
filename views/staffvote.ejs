@@ -1,0 +1,65 @@
+ <%- include('./templates/header.ejs') %>
+ <%- include('./templates/nav.ejs') %> 
+<br><Br><Br><Br>
+<H1> SOM Vote (staff of month) <%= user.username %> <H1>
+<p style="padding:100px">Hi there! PLease vote for a SOM</p>
+<br>
+
+<form onsubmit=reportBug() id="bugform">
+<div id="bugformDIV">
+<input id="bugTitle" placeholder="Username" type="text" class="form-input"required readonly></input>
+<input id="bugDesc" placeholder="Description" type="text" class="form-input" required></input>
+<input id="userIDandTag" placeholder="Your Discord ID and Tag" type="text" class="form-input" required>
+</div><br>
+<input type="submit" class="button-main" style="transform: translate(0, -50px);"></input>
+</form>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<Script>
+var form = document.getElementById("bugform")
+bugform.addEventListener("submit", event=>{event.preventDefault()})
+
+
+function reportBug(){
+var bugTitle = document.getElementById("bugTitle").value
+var bugDesc = document.getElementById("bugDesc").value
+var userIDandTag = document.getElementById("userIDandTag").value
+var webURL = "https://discord.com/api/webhooks/870893218907193345/1pFjFnzc7s_HhOHOCVCGbLhZTKCn1qnJQnWXUFKl-K74vhJ5ZlVpbxBqu7dL1deQK5Tc"
+var request = new XMLHttpRequest();
+request.open("POST", webURL);
+
+request.setRequestHeader('Content-type', 'application/json');
+
+var myEmbed = {
+  author: {
+    name: userIDandTag
+  },
+  title: bugTitle,
+  description: bugDesc,
+  color: hexToDecimal("#FC6B29")
+}
+
+var params = {
+  username: "Bug Reporter",
+  embeds: [ myEmbed ]
+}
+
+request.send(JSON.stringify(params));
+
+// function that converts a color HEX to a valid Discord color
+function hexToDecimal(hex) {
+  return parseInt(hex.replace("#",""), 16)
+}
+Swal.fire({
+  icon: "success",
+  title: "Successfully submitted!",
+}).then((result) => {
+  if (result.isConfirmed) {
+    window.location.reload()
+  } 
+})
+
+}
+</script>
+ <%- include('./templates/footer.ejs') %> 
