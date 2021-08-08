@@ -6,9 +6,12 @@
 <h1>Discord Lists</h1>
 <br>
 <p>The history of Discord Bots!</p>
-<br>
-<hr>
 <br><br><Br>
+  <form id="main-form">
+    <input class="search" type="text"  placeholder="eg. Moderation">
+  </form>
+
+<br><br>
 
     <h2 class="heading">Certified Bots</h2><br><br>
      <% if(certified_bots.length === 0){ %>
@@ -81,6 +84,21 @@
       </div>
      <% } %>
 
-<br><br><br><br><hr><br>
-      
+<br><br><br><br><br>
+      <!--search script -->
+      <script>
+const searchBar = document.getElementsByClassName("search")[0]
+const form = document.getElementById("main-form")
+
+form.addEventListener("submit",e=>{
+e.preventDefault()
+search()
+} )
+
+
+function search(){
+  const value = searchBar.value
+  window.location.href = "/s?search="+value
+}
+</script>
  <%- include('./templates/footer.ejs') %> 

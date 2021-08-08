@@ -78,32 +78,31 @@ app.use(passport.session()) // Using session
 
 
 
-// Main Page
-app.get('/', (req, res) => {
-  const reject = () => {
-    res.setHeader('www-authenticate', 'Basic')
-    res.sendStatus(401)
-  }
+// Beta page (removed)
+// app.get('/', (req, res) => {
+//   const reject = () => {
+//     res.setHeader('www-authenticate', 'Basic')
+//     res.sendStatus(401)
+//   }
 
-  const authorization = req.headers.authorization
+//   const authorization = req.headers.authorization
 
-  if (!authorization) {
-    return reject()
-  }
+//   if (!authorization) {
+//     return reject()
+//   }
 
-  const [username, password] = Buffer.from(authorization.replace('Basic ', ''), 'base64').toString().split(':')
+//   const [username, password] = Buffer.from(authorization.replace('Basic ', ''), 'base64').toString().split(':')
 
-  if (!(username === 'dlistsbeta' && password === 'discordlists100')) {
-    return reject()
-  }
+//   if (!(username === 'dlistsbeta' && password === 'discordlists100')) {
+//     return reject()
+//   }
 
-  res.render('beta')
+//   res.render('beta')
 
-})
+// })
 
 
-
-app.get('/main', async function(req, res) {
+app.get('/', async function(req, res) {
   const login_logout = req.isAuthenticated()
   const verified_bots = await addbot.find({ state: 'verified' })
   const random_bot = await addbot.find({ state: 'verified' })
@@ -166,6 +165,45 @@ app.get('/api/callback',
     )
   });
 
+
+//Search routes by MasterMind :)
+
+app.get('/s', async function (req,res){
+  const query = req.query.search.toLowerCase()
+
+  const promise = addbot.find()
+
+  let searchResults = []
+
+  var login_logout = req.isAuthenticated()
+  promise.then(allBots=>{
+
+    allBots.forEach(item=>{
+
+      var botname = item.botname.toLowerCase()
+      var longdes = item.longdes.toLowerCase()
+      var shortdes = item.shortdes.toLowerCase()
+
+      if(botname.includes(query) || longdes.includes(query) || shortdes.includes(query)){
+        searchResults.push(item)        
+      }
+    })
+    res.render("search", {
+      searchResults,
+      query,
+      login_logout})
+  })
+})
+
+app.get('/search', (req,res)=>{
+  const login_logout = req.isAuthenticated
+  const query = false
+  const searchResults = false
+  res.render("search", {
+    login_logout,
+    query,
+    searchResults})
+})
 
 app.get('/somvote', checkAuth, async function (req, res) {
   const login_logout = req.isAuthenticated()

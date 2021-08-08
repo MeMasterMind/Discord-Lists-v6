@@ -1,11 +1,27 @@
 {
   "files": {
+    "index.js": [
+      {
+        "id": "a6ab65ce-51a9-4e4e-af1b-324229bbb727",
+        "line": 521,
+        "version": 7298,
+        "index": 15194
+      }
+    ],
     "public/css/main.css": [
       {
         "id": "91b05c06-989f-4d9a-878b-120b64646c81",
         "line": 306,
-        "version": 2021,
+        "version": 2034,
         "index": 5218
+      }
+    ],
+    "views/beta.ejs": [
+      {
+        "id": "d909c4d9-9bf1-4568-a09e-e10c8548502b",
+        "line": 20,
+        "version": 278,
+        "index": 567
       }
     ],
     "views/bot.ejs": [
@@ -28,6 +44,14 @@
         "line": 25,
         "version": 1606,
         "index": 764
+      }
+    ],
+    "views/search.ejs": [
+      {
+        "id": "2cb29ee0-dd49-42b4-825e-c66b29c5043f",
+        "line": 10,
+        "version": 695,
+        "index": 252
       }
     ]
   }
