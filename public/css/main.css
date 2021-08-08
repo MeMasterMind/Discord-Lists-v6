@@ -645,3 +645,14 @@ a:hover{
 .search:focus {
   width: 70%;
 }
+
+.tag-selections{
+  display: flex;
+  flex-wrap: wrap;
+  width: 334px;
+}
+
+.tag-selections label{
+  margin: 7px;
+  flex: 1 0 21%;
+}

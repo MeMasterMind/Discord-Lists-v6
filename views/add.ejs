@@ -61,20 +61,21 @@
             <label for="validationCustom01" class="form-label">Invite URL. *</label>
             <input type="text" class="form-control" name="invite" id="validationCustom01" placeholder="discord.com/oath/" required>
         </div><br>
-        <div class="col-12" style="
-    display: flex;
-    justify-content: center;">
-		<p class="tag-area">
-					<label class="col-lg-12">Tags</label>
-					<select id="tags" class="input col-lg-12">
-						<option hidden value="">Select One</option>
-						<option value="">Moderation</option>
-						<option value="">Utility</option>
-						<option value="">Fun</option>
-					</select>
 					<script defer>
 						jQuery("#tags">.val("<?= newsPost.tags ?>")
 					</script>
+            <p style="font-weight:bold;">Select Tags</p>
+                    <div class="tag-selections">
+                    <label><input name="tags" type="checkbox" value="Fun">Fun</label>
+                    <label><input name="tags" type="checkbox" value="Moderation">Moderation</label>
+                    <label><input name="tags" type="checkbox" value="Anime">Anime</label>
+                    <label><input name="tags" type="checkbox" value="Utility">Utility</label>
+                    <label><input name="tags" type="checkbox" value="Leveling">Leveling</label>
+                    <label><input name="tags" type="checkbox" value="Economy">Economy</label>
+                    <label><input name="tags" type="checkbox" value="Game">Game</label>
+                    <label><input name="tags" type="checkbox" value="Social">Social</label>
+                    <label><input name="tags" type="checkbox" value="Other">Other</label>
+          </div>
 					</p><br><br>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>

@@ -155,7 +155,7 @@ app.get('/login', passport.authenticate('discord', { scope: scopes, prompt: prom
 // Callback the user
 app.get('/api/callback',
   passport.authenticate('discord', { failureRedirect: '/' }), async function(req, res) {
-    res.redirect('/main')
+    res.redirect('/user/@me')
     client.channels.cache.get(config.logs_channel).send(
       new Discord.MessageEmbed()
         .setTitle('Login Detected')
@@ -165,7 +165,9 @@ app.get('/api/callback',
     )
   });
 
-
+app.get('/main', (req,res)=>{
+  res.redirect('/')
+})
 //Search routes by MasterMind :)
 
 app.get('/s', async function (req,res){
@@ -387,7 +389,8 @@ app.post('/addbot/success', checkAuth, async function(req, res) {
           state: 'unverified',
           certification: 'uncertified',
           servercount: 'N/A',
-          vanity: ''
+          vanity: '',
+          tags: req.body.tags
         },
         { upsert: true }
       )

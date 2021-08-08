@@ -78,7 +78,7 @@ const bot = new mongoose.Schema({
         required: true
     },
 		tags: {
-			type: String,
+			type: Array,
 			required: true
 		}
 })

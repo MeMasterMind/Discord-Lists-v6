@@ -2,17 +2,23 @@
   "files": {
     "index.js": [
       {
+        "id": "8c14be35-841c-40e1-b6fd-4b4a8266cf9b",
+        "line": 159,
+        "version": 7785,
+        "index": 4643
+      },
+      {
         "id": "a6ab65ce-51a9-4e4e-af1b-324229bbb727",
         "line": 521,
-        "version": 7298,
-        "index": 15194
+        "version": 7303,
+        "index": 15216
       }
     ],
     "public/css/main.css": [
       {
         "id": "91b05c06-989f-4d9a-878b-120b64646c81",
         "line": 306,
-        "version": 2034,
+        "version": 2036,
         "index": 5218
       }
     ],
@@ -41,17 +47,17 @@
     "views/index.ejs": [
       {
         "id": "694eccc3-518e-44bb-97cb-c08f6d27c2e8",
-        "line": 25,
-        "version": 1606,
-        "index": 764
+        "line": 28,
+        "version": 1613,
+        "index": 859
       }
     ],
     "views/search.ejs": [
       {
         "id": "2cb29ee0-dd49-42b4-825e-c66b29c5043f",
-        "line": 10,
-        "version": 695,
-        "index": 252
+        "line": 6,
+        "version": 766,
+        "index": 157
       }
     ]
   }
