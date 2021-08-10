@@ -26,7 +26,7 @@ const PORT = process.env.PORT || 3000 //i changed the port to 3000 since 5000 wa
 
 // Client (Bot) Ready Event
 client.once('ready', () => {
-  client.user.setActivity('? | Discord Lists Beta', { type: 'WATCHING' });
+  client.user.setActivity('?help | Discord Lists Beta', { type: 'WATCHING' });
   console.log('[EVENT] Bot Is Online!\n[EVENT] Block Chain Is Online')
 })
 
@@ -115,6 +115,9 @@ app.get('/', async function(req, res) {
   })
 })
 
+
+
+
 app.get('/bots', (req, res) => {
   res.redirect('/')
 })
@@ -124,7 +127,7 @@ app.get('/twitter', (req, res) => {
 })
 
 app.get('/discord', (req, res) => {
-  res.redirect("https://discord.gg/y8jrXrVNhn")
+  res.redirect("https://discord.gg/B6b8vqZHfF")
 })
 
 app.get('/bug', async function(req, res) {
@@ -141,11 +144,9 @@ app.get('/bug', async function(req, res) {
 })
 
 
-
-
 app.get('/beta', async function(req, res) {
 
-  res.render('beta')
+  res.redirect('/')
 })
 
 
@@ -155,12 +156,17 @@ app.get('/login', passport.authenticate('discord', { scope: scopes, prompt: prom
 // Callback the user
 app.get('/api/callback',
   passport.authenticate('discord', { failureRedirect: '/' }), async function(req, res) {
+    let avatarID = req.user.avatar
+    let userID = req.user.id
+    const avatarURL = "https://cdn.discordapp.com/avatars/"+userID+"/"+avatarID
+
     res.redirect('/user/@me')
     client.channels.cache.get(config.logs_channel).send(
       new Discord.MessageEmbed()
         .setTitle('Login Detected')
         .setColor('GREEN')
         .setDescription(`\`${req.user.username}\` just logged into the site.`)
+        .setImage(avatarURL)
         .setTimestamp()
     )
   });
@@ -173,7 +179,7 @@ app.get('/main', (req,res)=>{
 app.get('/s', async function (req,res){
   const query = req.query.search.toLowerCase()
 
-  const promise = addbot.find()
+  const promise = addbot.find({state:"verified"})
 
   let searchResults = []
 
@@ -185,8 +191,12 @@ app.get('/s', async function (req,res){
       var botname = item.botname.toLowerCase()
       var longdes = item.longdes.toLowerCase()
       var shortdes = item.shortdes.toLowerCase()
-
-      if(botname.includes(query) || longdes.includes(query) || shortdes.includes(query)){
+      
+      var tags
+      if(item.tags){
+        tags = item.tags.toString().toLowerCase()
+      }
+      if(botname.includes(query) || longdes.includes(query) || shortdes.includes(query) || tags.includes(query)){
         searchResults.push(item)        
       }
     })
@@ -198,7 +208,7 @@ app.get('/s', async function (req,res){
 })
 
 app.get('/search', (req,res)=>{
-  const login_logout = req.isAuthenticated
+  const login_logout = req.isAuthenticated()
   const query = false
   const searchResults = false
   res.render("search", {
@@ -235,7 +245,8 @@ app.get('/info', checkAuth, async function(req, res) {
 app.get('/error', function(req, res) {
   const login_logout = req.isAuthenticated()
   res.render('error', {
-    req: req,
+    code: req.query.code,
+    message: req.query.message,
     login_logout: login_logout
   })
 })
@@ -260,13 +271,14 @@ app.get('/partners', function(req, res) {
 
 // CheckAdmin Function by Joe :smirkUwU:
 const checkAdmin = async (req, res, next) => {
+  const user = req.user
   if (req.isAuthenticated()) {
     if (client.guilds.cache.get(config.serverid).members.cache.get(req.user.id));
     if (user.check) {
       if (user.check.roles.cache.get(config.panel)) {
         next();
       } else {
-        res.redirect('/error?code=403&message=Your are not the proper rank to do his')
+        res.redirect("/error?code=403&message=You don't have access to this page!")
       }
     } else {
       req.session.backURL = req.url;
@@ -276,7 +288,7 @@ const checkAdmin = async (req, res, next) => {
 }
 
 //Staff Panel:
-app.get('/staffpanel', checkAuth, checkAdmin, async function(req, res) {
+app.get('/staffpanel', checkAuth,  async function(req, res) {
   const login_logout = req.isAuthenticated()
   const unverifiedBot = await addbot.find({ state: "unverified" })
 
@@ -312,7 +324,7 @@ app.get("/staffpanel/accept/:id", checkAuth, async (req, res) => {
     )
 })
 
-//Deny and Delete not drom Staffpanel
+//Deny and Delete bot from Staffpanel
 
 app.post("/staffpanel/delete/:id", checkAuth, async (req, res) => {
   const ID = req.params.id
@@ -613,7 +625,7 @@ app.get('/user/:userid', async function(req, res) {
 
 // Other Links
 app.get(['/invite', '/join'], async function(req, res) {
-  res.redirect("https://discord.gg/3sdkRuk63p")
+  res.redirect("https://discord.gg/B6b8vqZHfF")
 })
 
 app.get('/terms', async function(req, res) {

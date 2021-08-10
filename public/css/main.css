@@ -81,7 +81,6 @@ a, a:hover{
 
 h1{
   text-align:center;
-  color:#fff !important;
   font-size:50px !important;
   font-weight: bold;
 }
@@ -91,6 +90,9 @@ h2{
 
 }
 
+.text-center{
+  text-align: center;
+}
 p{
   text-align:center;
   color:#fff !important;
@@ -129,6 +131,11 @@ transform: translate(10%,-110%)
 }
 
 .viewbot{
+  position: absolute;
+  transform: translate(-100%,-110%)
+}
+
+.contactus{
   position: absolute;
   transform: translate(-100%,-110%)
 }
@@ -655,4 +662,30 @@ a:hover{
 .tag-selections label{
   margin: 7px;
   flex: 1 0 21%;
+}
+
+.tag-display{
+  flex-flow: row wrap;
+}
+
+.tag-element{
+  margin: 10px;
+  background: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  color: var(--secondary);
+}
+
+.tag-element:hover{
+ background: #d8d8d8;
+ color: initial;
+}
+
+center h1{
+  color: #fff;
+}
+
+.deslong{
+  word-break: break-all;
+  white-space: pre-wrap;
 }

@@ -54,6 +54,7 @@ function hexToDecimal(hex) {
 Swal.fire({
   icon: "success",
   title: "Successfully submitted!",
+  html: 'Join our <u><a href="/join" style="color:#0d6efd">Discord</a></u> to get further assisted.'
 }).then((result) => {
   if (result.isConfirmed) {
     window.location.reload()

@@ -15,7 +15,7 @@
 
     <h2 class="heading">Certified Bots</h2><br><br>
      <% if(certified_bots.length === 0){ %>
-        <h3>No Certified Bots found. Please visit us later.</h3>
+        <h3 class="text-center">No Certified Bots found. Please visit us later.</h3>
       <% } else{ %>
       <div class="center-flex">
       <% certified_bots.forEach(function(bot) { %>
@@ -38,7 +38,7 @@
 <br><br><br><br><br>
     <h2 class="heading">Other Bots</h2><br><br>
      <% if(verified_bots.length === 0){ %>
-        <h3>No Bots found. Please visit us later.</h3>
+        <h3 class="text-center">No Bots found. Please visit us later.</h3>
       <% } else{ %>
       <div class="center-flex">
       <% verified_bots.forEach(function(bot) { %>
@@ -62,7 +62,7 @@
 <br><br><br><br><br>
     <h2 class="heading">Random Bots</h2><br><br>
      <% if(random_bot.length === 0){ %>
-        <h3>No Bots found. Please visit us later.</h3>
+        <h3 class="text-center">No Bots found. Please visit us later.</h3>
       <% } else{ %>
       <div class="center-flex">
       <% random_bot.forEach(function(random) { %>

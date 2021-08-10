@@ -9,8 +9,9 @@
     <li><i class="fas fa-home"></i><a href='/'> Home</a></li>
     <li><i class="fas fa-user"></i><a href='/user/@me'> Profile</a></li>
     <li><i class="fas fa-users"></i><a  href='/invite'> Discord</a></li>
+    <li><i class="fas fa-search"></i><a  href='/search'>Search</a></li>
     <% if(login_logout){ %>
-          <li class=""><a href='/logout'>Logout</a></li>
+          <li class="login_logout" id="button_login"><a href='/logout'>Logout</a></li>
           <% } else{ %>  
         
           <li class="login_logout" id="button_login"><a href='/login'>Login</a></li>

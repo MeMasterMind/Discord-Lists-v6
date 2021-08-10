@@ -4,10 +4,6 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <%
-    var url = new URL(`https://localhost:5000/error?code=${req.query.code}&message=${req.query.message}`);
-     var params = new URLSearchParams(url.search);
-    %>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,8 +17,12 @@
   </head>
   <body>
       <h1>Error</h1>
-      <br><br><img src="https://cdn.dribbble.com/users/156243/screenshots/3626759/something_went_wrong.png" style="
-    display: block;
-    margin: auto;
-"><br><br>
+      <br><br>
+      <div class="center-flex" style="color:var(--main-bg-color)">
+      <% if(code) {%> <h1><%=code%></h1><% } %>
+      </div>
+      <div class="center-flex">
+      <% if(message) {%> <h4><%=message%></h4><% } %> </div>
+      <br><br>
+      <p>Found a bug? What's to ponder, <a href="/bug" style="text-decoration:underline;">report</a> it!  </p>
  <%- include('./templates/footer.ejs') %> 

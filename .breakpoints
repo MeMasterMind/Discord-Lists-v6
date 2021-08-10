@@ -1,25 +1,11 @@
 {
   "files": {
-    "index.js": [
-      {
-        "id": "8c14be35-841c-40e1-b6fd-4b4a8266cf9b",
-        "line": 159,
-        "version": 7785,
-        "index": 4643
-      },
-      {
-        "id": "a6ab65ce-51a9-4e4e-af1b-324229bbb727",
-        "line": 521,
-        "version": 7303,
-        "index": 15216
-      }
-    ],
     "public/css/main.css": [
       {
         "id": "91b05c06-989f-4d9a-878b-120b64646c81",
-        "line": 306,
-        "version": 2036,
-        "index": 5218
+        "line": 312,
+        "version": 2303,
+        "index": 5288
       }
     ],
     "views/beta.ejs": [
@@ -33,31 +19,31 @@
     "views/bot.ejs": [
       {
         "id": "528d0daa-8639-4905-81af-7e1c7672b458",
-        "line": 58,
-        "version": 1631,
-        "index": 3387
+        "line": 59,
+        "version": 1853,
+        "index": 3454
       },
       {
         "id": "a8f25243-089c-41d5-9172-21e8269c4f33",
-        "line": 93,
-        "version": 1631,
-        "index": 4511
+        "line": 101,
+        "version": 1853,
+        "index": 4791
       }
     ],
     "views/index.ejs": [
       {
         "id": "694eccc3-518e-44bb-97cb-c08f6d27c2e8",
         "line": 28,
-        "version": 1613,
-        "index": 859
+        "version": 1673,
+        "index": 982
       }
     ],
     "views/search.ejs": [
       {
         "id": "2cb29ee0-dd49-42b4-825e-c66b29c5043f",
         "line": 6,
-        "version": 766,
-        "index": 157
+        "version": 1115,
+        "index": 159
       }
     ]
   }
