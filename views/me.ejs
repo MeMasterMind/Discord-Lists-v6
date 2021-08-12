@@ -17,9 +17,13 @@
   </head>
   <body><br><br><br>
     <center><img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>" class="rounded" alt="..."></center>
-    <center><h1><%= user.username %>#<%= user.discriminator %></h1></center><br>
-    <center><a   href="/addbot"><button class="button-main">Add Bot</button></a></center><br><br>
-    <center><a   href="/"><button class="button-main">Return Home</button></a></center><br><br>
+    <center><h1 class="usernameDiscriminator"><%= user.username %>#<%= user.discriminator %></h1></center><br>
+    <center><a   href="/addbot"><button class="button-main"><i class="fas fa-plus"></i> Add Bot </button></a></center><br>
+    
+    <% if(userHasAccessToStaffPanel){ %>
+    <center><a   href="/staffpanel"><button class="button-main"><i class="fas fa-crown"></i> Staff Panel </button></a></center><br>
+  <% } %>
+    <center><a   href="/"><button class="button-main"><i class="fas fa-home"></i> Return Home </button></a></center><br><br>
     <div class="row row-cols-1 row-cols-md-2 g-4">
       <% bots.forEach(function(bot) { %>
     <div class="col">

@@ -3,9 +3,12 @@
 @media only screen and (max-width: 450px){
   .card{
     margin-right: 0 !important;
-    margin: 30px;
   }
   #menu li{
     margin-left: 20px;
+  }
+  .usernameDiscriminator{
+    word-break: break-all;
+    padding: 30px;
   }
 }

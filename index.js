@@ -269,26 +269,26 @@ app.get('/partners', function(req, res) {
 
 
 
-// CheckAdmin Function by Joe :smirkUwU:
+
+
 const checkAdmin = async (req, res, next) => {
-  const user = req.user
-  if (req.isAuthenticated()) {
-    if (client.guilds.cache.get(config.serverid).members.cache.get(req.user.id));
-    if (user.check) {
-      if (user.check.roles.cache.get(config.panel)) {
-        next();
-      } else {
-        res.redirect("/error?code=403&message=You don't have access to this page!")
-      }
-    } else {
-      req.session.backURL = req.url;
-      res.redirect('/login')
-    }
+  const reqUser = req.user
+  const guild = await client.guilds.cache.get(config.serverid)
+  const role = await guild.members.cache.filter(member => member.roles.cache.find(role => role.name === "Panel Access")).map(member => member.id)
+
+  const bool =role.find(userID=>userID == reqUser.id)
+
+  if(bool){
+    next()
+  }
+  else{
+    res.redirect("/error?code=403&message=You don't have sufficient permissions to access this page!")
   }
 }
 
+
 //Staff Panel:
-app.get('/staffpanel', checkAuth,  async function(req, res) {
+app.get('/staffpanel', checkAuth, checkAdmin,  async function(req, res) {
   const login_logout = req.isAuthenticated()
   const unverifiedBot = await addbot.find({ state: "unverified" })
 
@@ -602,10 +602,23 @@ app.get('/user/@me', checkAuth, async function(req, res) {
   }
   const botdata = await addbot.find({ botowner: `${req.user.username}#${req.user.discriminator}` })
   const bots = botdata
+
+  const reqUser = req.user
+  let userHasAccessToStaffPanel = false;
+  const guild = await client.guilds.cache.get(config.serverid)
+  const role = await guild.members.cache.filter(member => member.roles.cache.find(role => role.name === "Panel Access")).map(member => member.id)
+
+  const bool =role.find(userID=>userID == reqUser.id)
+
+  if(bool){
+    userHasAccessToStaffPanel = true
+  }
+
   res.render('me', {
-    bots: bots,
-    user: user,
-    login_logout: login_logout
+    bots,
+    user,
+    login_logout,
+    userHasAccessToStaffPanel
   })
 })
 
@@ -684,6 +697,13 @@ app.get('/api/bot/:botid', async function(req, res) {
     "certification": botid.certification,
     "servercount": botid.servercount,
     "vanity": botid.vanity
+  })
+})
+
+app.get('/faq', (req,res)=>{
+  const login_logout = req.isAuthenticated()
+  res.render("faq", {
+    login_logout
   })
 })
 

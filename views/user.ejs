@@ -1,22 +1,15 @@
  <%- include('./templates/header.ejs') %>
  <%- include('./templates/nav.ejs') %> 
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <%- include("templates/header") %>
-
-    <title>Discord Lists | <%= user.username %></title>
-  </head>
   <body><br><br><br>
-    <center><img src="<%= user.useravatar %>" class="rounded" alt="..."></center>
-    <center><h1><%= user.username %>#<%= user.discriminator %></h1></center><br><br>
+    <center>
+    <img src="<%= user.useravatar %>" class="rounded" alt="avatar">
+    </center>
+
+    <center>
+    <h1><%= user.username %>#<%= user.discriminator %></h1>
+    </center><br><br>
+    
     <div class="row row-cols-1 row-cols-md-2 g-4">
       <% bots.forEach(function(bot) { %>
     <div class="col">

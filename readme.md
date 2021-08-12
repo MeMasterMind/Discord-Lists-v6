@@ -4,24 +4,25 @@
 We are glad to announce the release of V6 for Discord Lists!
 
  About Version 6:
+
 ## **Added:**
 1. Changed the entire website's theme into something even more refreshing and cool!
 2. Website Background
 3. Phone Compatibility
-4. Vanity Links (I know we had that but it was very broken so we just re-did the whole thi
+4. Vanity Links (I know we had that but it was very broken so we just re-did the whole thing)
+
 ## **Removed:**
 
 1. Theme change
-2. NPM Packages
+2. Templates
 
 ## **Returned:**
 
 1. The most suggested feature to return, Certified Bots!
-2. Web Live Chat Feature
 
 ## **Fixed:**
 
-1. Search 
+1. Search Bots
 
 ## **Changed:**
 
