@@ -34,8 +34,9 @@
         <div class="imgBx">
           <img src="<%= bot.botavatar %>">
         </div>
-        <div class="contentBx"><br>
-          <h2 style="font-size: 25xpx;"><%= bot.botname %></h2><br><br>
+        <div class="contentBx">
+          <h2 style="font-size: 25xpx;"><%= bot.botname %></h2>
+          <p><%=bot.shortdes%></p>
           <a href="/bot/<%= bot.botid %>" class="viewbot"><button class="button-main"><i class="fas fa-eye"></i> View </button></a>
           <a href="<%= bot.invite %>" class="invitebot"><button class="button-main"><i class="fas fa-arrow-right"></i> Invite </button></a>
         </div>
@@ -45,6 +46,7 @@
               </div>
      <% } %>
 <br><br>
+<div style="height:60vh"></div>
 <script>
 const searchBar = document.getElementsByClassName("search")[0]
 const form = document.getElementById("main-form")

@@ -14,7 +14,7 @@ module.exports = {
             })
             return
         }
-        const channel = client.channels.cache.get(config.logs_channel)
+        const channel = client.channels.cache.get(process.env.LOGS_CHANNEL)
         if(!args[1]){
             message.channel.send({
                 embed:{

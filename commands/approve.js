@@ -1,5 +1,4 @@
 const Botinfo = require('../models/bots')
-const config = require('../config.json')
 
 module.exports = {
     name:'approve',
@@ -16,7 +15,7 @@ module.exports = {
            })
            return
        }
-       const channel = client.channels.cache.get(config.logs_channel)
+       const channel = client.channels.cache.get(process.env.LOGS_CHANNEL)
        const bot = await Botinfo.findOne({ botid: args[0] })
        if(!bot){
            message.channel.send({

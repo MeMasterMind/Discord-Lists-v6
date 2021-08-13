@@ -1,5 +1,6 @@
 const Botdata = require('../models/bots')
 
+
 module.exports = {
     name:'certify',
     description:'Certify a bot',
@@ -15,7 +16,7 @@ module.exports = {
            })
            return
        }
-       const channel = client.channels.cache.get(config.logs_channel)
+       const channel = client.channels.cache.get(process.env.LOGS_CHANNEL)
        const bot = await Botdata.findOne({ botid: args[0] })
        if(!bot){
            message.channel.send({

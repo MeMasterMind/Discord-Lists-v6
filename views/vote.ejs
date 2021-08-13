@@ -14,12 +14,23 @@
     <title>Discord Lists | Voting <%= botid.botname %></title>
   </head>
   <body><br>
-      <center><h3><font color="white">You're now voting for <%= botid.botname %> bot. Voting helps this bot to get more views</font></h3></center><br>
-      <center><img src="<%= botid.botavatar %>" class="rounded" alt="..."></center><br>
-      <center><form class="needs-validation" method="POST" action="/bot/vote/<%= botid.botid %>">
+      <center>
+      <img src="<%= botid.botavatar %>" class="rounded" alt="<%=botid.botname%>'s avatar"><Br>
+      <h3><font color="white">Voting for <%= botid.botname %>.<br> You can vote once per every 12 hours.</font></h3></center><br>
+      <center></center><br>
+      <center>
+      
+      <% if(hasUserAlreadyVoted && hasUserAlreadyVoted12hr){%>
+
+        <button class="button-main disabled">🎉 Voted!</button>
+
+      <% }else {%>
+            <form class="needs-validation" method="POST" action="/bot/vote/<%= botid.botid %>">
         <div class="col-12">
-          <button class="btn btn-primary" type="submit">Vote</button>
+          <button class="button-main" type="submit">Vote</button>
         </div><br>
-      </form></center>
+      </form>
+      <% } %>
+      </center>
   </body>
 </html>

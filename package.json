@@ -19,7 +19,7 @@
     "express-session": "^1.17.2",
     "html-to-text": "^7.1.1",
     "maintenance": "0.0.2",
-    "mongoose": "^5.13.5",
+    "mongoose": "^5.13.7",
     "node-fetch": "^2.6.1",
     "nodejs-server-maintenance": "^2.0.4",
     "nodemon": "^2.0.12",

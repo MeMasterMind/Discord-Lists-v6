@@ -5,15 +5,17 @@ const Strategy = require('passport-discord').Strategy
 const app = express()
 const fs = require('fs')
 const parser = require('body-parser')
+require("dotenv").config()
 const mongoose = require('mongoose')
 const addbot = require('./models/bots')
 const member = require('./models/users')
 const votes = require('./models/votes.js')
+const votes12hr = require('./models/votes-12h.js')
 const fetch = require('node-fetch')
 const Discord = require('discord.js')
 const client = new Discord.Client()
-const config = require('./config.json')
 const websiteURL = "https://a-botlist-without-a-name.crazybotboy.repl.co";
+
 const PORT = process.env.PORT || 3000 //i changed the port to 3000 since 5000 was causing errors
 //ok
 /*
@@ -161,7 +163,7 @@ app.get('/api/callback',
     const avatarURL = "https://cdn.discordapp.com/avatars/"+userID+"/"+avatarID
 
     res.redirect('/user/@me')
-    client.channels.cache.get(config.logs_channel).send(
+    client.channels.cache.get(process.env.LOGS_CHANNEL).send(
       new Discord.MessageEmbed()
         .setTitle('Login Detected')
         .setColor('GREEN')
@@ -219,13 +221,7 @@ app.get('/search', (req,res)=>{
 
 app.get('/somvote', checkAuth, async function (req, res) {
   const login_logout = req.isAuthenticated()
-  const verified_bots = await addbot.find({ state: 'verified' }).limit(2)
-  const random_bot = await addbot.find({ state: 'verified' }).limit(1)
-  const certified_bots = await addbot.find({ certification: 'certified' })
   res.render('staffvote', {
-    verified_bots: verified_bots,
-    certified_bots: certified_bots,
-    random_bot: random_bot,
     login_logout: login_logout
   })
 })
@@ -273,7 +269,7 @@ app.get('/partners', function(req, res) {
 
 const checkAdmin = async (req, res, next) => {
   const reqUser = req.user
-  const guild = await client.guilds.cache.get(config.serverid)
+  const guild = await client.guilds.cache.get(process.env.SERVERID)
   const role = await guild.members.cache.filter(member => member.roles.cache.find(role => role.name === "Panel Access")).map(member => member.id)
 
   const bool =role.find(userID=>userID == reqUser.id)
@@ -317,7 +313,7 @@ app.get("/staffpanel/accept/:id", checkAuth, async (req, res) => {
     },
     { upsert: true }
   ).then(res.redirect("/staffpanel"))
-    .then(client.channels.cache.get(config.logs_channel).send(acceptembed))
+    .then(client.channels.cache.get(process.env.LOGS_CHANNEL).send(acceptembed))
     .catch(err => {
       res.redirect("/error")
     }
@@ -357,7 +353,7 @@ app.get('/addbot', checkAuth, async function(req, res) {
 app.post('/addbot/success', checkAuth, async function(req, res) {
   const info = req.body.id
   const userinfo = req.user
-  const token = process.env['TOKEN']
+  const token = process.env.TOKEN
   const fetchuser = async id => {
     const response = await fetch(`https://discord.com/api/v9/users/${id}`, {
       headers: {
@@ -426,8 +422,8 @@ app.post('/addbot/success', checkAuth, async function(req, res) {
       .addField('Bot:', "<@" + data.id + ">")
       .setFooter('Discord Lists | Queued Bot')
       .setColor('YELLOW')
-    client.channels.cache.get(config.logs_channel).send(embed);
-    client.channels.cache.get(config.logs_channel).send('<@&856843836634169374>');
+    client.channels.cache.get(process.env.LOGS_CHANNEL).send(embed);
+    client.channels.cache.get(process.env.LOGS_CHANNEL).send('<@&856843836634169374>');
   })()
 })
 
@@ -533,7 +529,7 @@ app.get('/bot/x/:vanity', async function(req, res) {
 app.get('/bot/:botid/certification', checkAuth, async function(req, res) {
     const login_logout = req.isAuthenticated()
 
-  const botid = await addbot.findOne({ botid: req.param.botid })
+  const botid = await addbot.findOne({ botid: req.params.botid })
   if (!botid) {
     res.redirect('/error?code=404&message=We cannot find a bot with that ID')
   }
@@ -548,39 +544,68 @@ app.get('/bot/:botid/vote', checkAuth, async function(req, res) {
   const login_logout = req.isAuthenticated()
 
   const botid = await addbot.findOne({ botid: req.params.botid })
-  res.render('vote', {
-    botid: botid,
-    login_logout: login_logout
+
+  await votes.find().then(async (vote)=>{
+  await votes12hr.find().then(async (vote12hr)=>{
+
+    console.log(vote)
+    console.log(vote12hr)
+
+  let hasUserAlreadyVoted12hr = false
+  let hasUserAlreadyVoted = false
+  if (vote.some(e => e.userid === req.user.id)) {
+  hasUserAlreadyVoted = true
+  }
+
+  if(vote12hr.some(e=>e.userid === req.user.id)){
+    hasUserAlreadyVoted12hr = true
+  }
+
+    console.log(hasUserAlreadyVoted)
+    console.log(hasUserAlreadyVoted12hr)
+
+    res.render('vote', {
+        hasUserAlreadyVoted,
+        hasUserAlreadyVoted12hr,
+        botid,
+        login_logout
+      })
+    })
   })
 })
 
-app.post('/bot/vote/:botid', checkAuth, async function(req, res) {
-  const login_logout = req.isAuthenticated()
 
-  await votes.findOneAndUpdate(
-    {
-      username: `${req.user.username}#${req.user.discriminator}`,
-      botid: req.params.botid
-    },
-    {
-      $set: {
-        date: Date.now(),
-        ms: 43200000
-      }
-    },
-    { upsert: true }
-  )
-  await addbot.findOneAndUpdate(
-    {
-      botid: req.params.botid
-    },
-    {
-      $inc: {
-        votes: 1
-      }
-    }
+
+app.get('/testing', checkAuth, (req,res)=>{
+  res.send(req.user)
+})
+
+app.post('/bot/vote/:botid', checkAuth, async function(req, res) {
+  const userVote = new votes({
+    username: req.user.username + '#'+ req.user.discriminator,
+    userid: req.user.id,
+    botid: req.params.botid,
+    date: Date.now(),
+    ms: 45000
+  })
+    const userVote12hr = new votes12hr({
+    username: req.user.username + '#'+ req.user.discriminator,
+    userid: req.user.id,
+    botid: req.params.botid,
+    date: Date.now(),
+    ms: 45000
+  })
+  await userVote12hr.save().then(
+  await userVote.save()
+  .then(res.redirect('/bot/'+req.params.botid+'/vote'))
   )
 })
+
+//DELETE ALL VOTES 
+
+// votes.deleteMany().then(data=>console.log(data))
+ //votes12hr.deleteMany({ms:45000}).then(data=>console.log(data))
+
 
 // My Profile Data
 app.get('/user/@me', checkAuth, async function(req, res) {
@@ -605,7 +630,7 @@ app.get('/user/@me', checkAuth, async function(req, res) {
 
   const reqUser = req.user
   let userHasAccessToStaffPanel = false;
-  const guild = await client.guilds.cache.get(config.serverid)
+  const guild = await client.guilds.cache.get(process.env.SERVERID)
   const role = await guild.members.cache.filter(member => member.roles.cache.find(role => role.name === "Panel Access")).map(member => member.id)
 
   const bool =role.find(userID=>userID == reqUser.id)
@@ -730,6 +755,7 @@ app.listen(PORT, async function(err) {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
+    useCreateIndex: true,
   }).then(console.log('Successfully connected to the mongoDB database'))
   if (err) console.error(err)
   console.log('Listening at https://localhost:5000')
@@ -767,11 +793,12 @@ client.on('message', async message => {
   }
 })
 
-client.login(config.token)
+client.login(process.env.TOKEN)
 
 
 //rendering the 404 page
 app.use(function(req, res, next) {
-  res.status(404).render("404")
+  const login_logout = req.isAuthenticated()
+  res.status(404).render("404", {login_logout})
 })
 

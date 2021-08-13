@@ -15,6 +15,9 @@ body{
   color: #fff;
   font-family: 'Poppins', sans-serif;}
 
+.disabled:hover{
+  cursor: not-allowed;
+}
 .card{
   background:#000000 ;
 }
@@ -187,12 +190,16 @@ transform: translate(10%,-110%)
   transition: 0.5s;
 }
 
+.contentBx p{
+  transform: translate(0, -60px);
+  margin: 0px 30px 18px 30px;
+}
 
 .container .card .imgBx img{
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -80%);
+  transform: translate(-50%, -100%);
   width: 50%;
   height: auto;
 }
@@ -215,7 +222,7 @@ transform: translate(10%,-110%)
   letter-spacing: 1px;
   color: #fff;
   margin: 0;
-  transform: translateY(-30px)
+  transform: translateY(-80px)
 }
 
 
@@ -454,6 +461,10 @@ justify-content: center;
  align-items: center;
 }
 
+#notfound-svg{
+  width: 500px;
+  height: auto;
+}
 /* Scrollbar */
 
 
@@ -815,4 +826,8 @@ center h1{
 
 .mini-title a{
   color: var(--main-bg-color)
+}
+
+footer svg{
+  width: 21px;
 }

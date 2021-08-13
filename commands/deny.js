@@ -16,7 +16,7 @@ module.exports = {
            })
            return
        }
-       const channel = client.channels.cache.get(config.logs_channel)
+       const channel = client.channels.cache.get(process.env.LOGS_CHANNEL)
        if(reason === undefined) reason = "Unspecified"
 
        const bot = await Botinfo.findOne({ botid: args[0] })

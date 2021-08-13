@@ -23,6 +23,6 @@ const votes = new mongoose.Schema({
     }
 },{timestamps: true})
 
-votes.index({"expire_at": 1 }, { expireAfterSeconds: 1209600 } );
+votes.index({"expire_at": 1 }, { expireAfterSeconds: 43200 } );
 
-module.exports = mongoose.model('votes', votes);
+module.exports = mongoose.model('votes12hr', votes);
