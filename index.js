@@ -9,12 +9,11 @@ require("dotenv").config()
 const mongoose = require('mongoose')
 const addbot = require('./models/bots')
 const member = require('./models/users')
-const votes = require('./models/votes.js')
 const votes12hr = require('./models/votes-12h.js')
 const fetch = require('node-fetch')
 const Discord = require('discord.js')
 const client = new Discord.Client()
-const websiteURL = "https://a-botlist-without-a-name.crazybotboy.repl.co";
+const websiteURL = "https://discordlists100.xyz";
 
 const PORT = process.env.PORT || 3000 //i changed the port to 3000 since 5000 was causing errors
 //ok
@@ -28,12 +27,12 @@ const PORT = process.env.PORT || 3000 //i changed the port to 3000 since 5000 wa
 
 // Client (Bot) Ready Event
 client.once('ready', () => {
-  client.user.setActivity('?help | Discord Lists Beta', { type: 'WATCHING' });
+  client.user.setActivity('dl!help | discordlists100.xyz', { type: 'WATCHING' });
   console.log('[EVENT] Bot Is Online!\n[EVENT] Block Chain Is Online')
 })
 
 
-// Botlist Website
+
 app.use(parser.urlencoded({ extended: false })) // Encoding
 app.use(parser.json()) // Parsing json objects
 app.set('view engine', 'ejs') // Set the view engine as ejs
@@ -48,13 +47,13 @@ passport.deserializeUser(function(obj, done) {
 
 // Scopes
 var scopes = ['identify', 'email', 'guilds']
-var prompt = 'consent'
+var prompt = 'consent';
 
 // SECRETS FOR CALLBACK SESSION (STORE THEM IN ENV FILE)
 passport.use(new Strategy({
-  clientID: '786125193394651166',
-  clientSecret: '2TY8uwcp2Cmv7bxvczy72I5BrZgelMnQ',
-  callbackURL: 'https://a-botlist-without-a-name.crazybotboy.repl.co/api/callback',
+  clientID: '870310174953467985',
+  clientSecret: 'mFAERH4aSakeJrJeWwfuwUVo_THgIFMc',
+  callbackURL: 'https://discordlists100.xyz/api/callback',
   scope: scopes,
   prompt: prompt,
 }, function(accessToken, refreshToken, profile, done) {
@@ -65,7 +64,7 @@ passport.use(new Strategy({
 
 // Storing current session (Cookies)
 app.use(session({
-  secret: '%#AIN*AFFFFAF%%%OJOJ#@#$$%^!$%^^%*^%#*&$%*$@#$$#@%$@#@#$@#$$#!@!$#!@%$%!^!##^*$%!$%%$##$$#!!~~$#@%#$^!',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false
 }));
@@ -79,31 +78,7 @@ app.use(passport.session()) // Using session
 
 
 
-
-// Beta page (removed)
-// app.get('/', (req, res) => {
-//   const reject = () => {
-//     res.setHeader('www-authenticate', 'Basic')
-//     res.sendStatus(401)
-//   }
-
-//   const authorization = req.headers.authorization
-
-//   if (!authorization) {
-//     return reject()
-//   }
-
-//   const [username, password] = Buffer.from(authorization.replace('Basic ', ''), 'base64').toString().split(':')
-
-//   if (!(username === 'dlistsbeta' && password === 'discordlists100')) {
-//     return reject()
-//   }
-
-//   res.render('beta')
-
-// })
-
-
+//Home page
 app.get('/', async function(req, res) {
   const login_logout = req.isAuthenticated()
   const verified_bots = await addbot.find({ state: 'verified' })
@@ -176,8 +151,8 @@ app.get('/api/callback',
 app.get('/main', (req,res)=>{
   res.redirect('/')
 })
-//Search routes by MasterMind :)
 
+//Search Routes
 app.get('/s', async function (req,res){
   const query = req.query.search.toLowerCase()
 
@@ -328,7 +303,7 @@ app.post("/staffpanel/delete/:id", checkAuth, async (req, res) => {
   await addbot.findOneAndRemove({
     botid: ID
   }).then(res.redirect("/staffpanel"))
-    .then(client.channels.cache.get('869945590686027825').send(req.user.username + "#" + req.user.discriminator + " has just Denied and permanently deleted " + botname))
+    .then(client.channels.cache.get(process.env.LOGS_CHANNEL).send(req.user.username + "#" + req.user.discriminator + " has just Denied and permanently deleted " + botname))
 
 
 })
@@ -477,8 +452,8 @@ app.post('/botedit/success/:botid', checkAuth, async function(req, res) {
       github: req.body.github,
     }
   )
-  client.channels.cache.get('869945590686027825').send(req.user.username + "#" + req.user.discriminator + " Has updated their bot. (" + websiteURL + "/bot/" + req.params.botid + ")")
-  res.redirect('/bot/' + req.params.botid + "\n \n  ")
+  client.channels.cache.get(process.env.LOGS_CHANNEL).send(req.user.username + "#" + req.user.discriminator + " Has updated their bot. (" + websiteURL + "/bot/" + req.params.botid + ")")
+  res.redirect(`/bot/${req.params.botid}`)
 })
 
 // Redirecting...
@@ -539,55 +514,48 @@ app.get('/bot/:botid/certification', checkAuth, async function(req, res) {
   })
 })
 
+app.post('/bot/:botid/certification', async function(req, res){
+        addbot.findOneAndUpdate(
+                {
+                        botid: req.params.botid
+                },
+                {
+                        certification: 'pending'
+                }
+        )
+        res.redirect(`/bot/${req.params.botid}`)
+        
+})
+
 //Voting API
 app.get('/bot/:botid/vote', checkAuth, async function(req, res) {
   const login_logout = req.isAuthenticated()
 
   const botid = await addbot.findOne({ botid: req.params.botid })
 
-  await votes.find().then(async (vote)=>{
+
   await votes12hr.find().then(async (vote12hr)=>{
 
-    console.log(vote)
-    console.log(vote12hr)
-
   let hasUserAlreadyVoted12hr = false
-  let hasUserAlreadyVoted = false
-  if (vote.some(e => e.userid === req.user.id)) {
-  hasUserAlreadyVoted = true
-  }
+
 
   if(vote12hr.some(e=>e.userid === req.user.id)){
     hasUserAlreadyVoted12hr = true
   }
 
-    console.log(hasUserAlreadyVoted)
-    console.log(hasUserAlreadyVoted12hr)
 
     res.render('vote', {
-        hasUserAlreadyVoted,
         hasUserAlreadyVoted12hr,
         botid,
         login_logout
       })
     })
   })
-})
 
 
 
-app.get('/testing', checkAuth, (req,res)=>{
-  res.send(req.user)
-})
 
 app.post('/bot/vote/:botid', checkAuth, async function(req, res) {
-  const userVote = new votes({
-    username: req.user.username + '#'+ req.user.discriminator,
-    userid: req.user.id,
-    botid: req.params.botid,
-    date: Date.now(),
-    ms: 45000
-  })
     const userVote12hr = new votes12hr({
     username: req.user.username + '#'+ req.user.discriminator,
     userid: req.user.id,
@@ -595,17 +563,13 @@ app.post('/bot/vote/:botid', checkAuth, async function(req, res) {
     date: Date.now(),
     ms: 45000
   })
-  await userVote12hr.save().then(
-  await userVote.save()
-  .then(res.redirect('/bot/'+req.params.botid+'/vote'))
-  )
+   await userVote12hr.save()
+  res.redirect('/bot/'+req.params.botid+'/vote')
 })
 
 //DELETE ALL VOTES 
 
-// votes.deleteMany().then(data=>console.log(data))
- //votes12hr.deleteMany({ms:45000}).then(data=>console.log(data))
-
+//  votes12hr.deleteMany({ms:45000}).then(data=>console.log(data))
 
 // My Profile Data
 app.get('/user/@me', checkAuth, async function(req, res) {
@@ -725,6 +689,21 @@ app.get('/api/bot/:botid', async function(req, res) {
   })
 })
 
+//Get the no of votes for each bot
+app.get('/bot/:botid/getVotes', async (req,res)=>{
+  const botid = await addbot.findOne({ botid: req.params.botid })
+  if(!botid) return res.json({ "code": "404", "message": "cannot find the bot id" })
+  var voteCount = 0
+  votes12hr.find().then(data=>{
+    data.forEach(object=>{
+      if(object.botid === req.params.botid){
+        voteCount++
+      }
+    })
+      res.json({ "votes": voteCount})
+  })
+})
+
 app.get('/faq', (req,res)=>{
   const login_logout = req.isAuthenticated()
   res.render("faq", {
@@ -751,7 +730,7 @@ function makeAPI(length) {
 
 // Starting Express Server With PORT 5000
 app.listen(PORT, async function(err) {
-  await mongoose.connect('mongodb+srv://Admin:Admin1234@new-bot-list.w0s2g.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
+  await mongoose.connect(process.env.MONGOURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
@@ -762,7 +741,7 @@ app.listen(PORT, async function(err) {
 })
 
 //Botlist bot
-const PREFIX = '?'
+const PREFIX = 'dl!'
 client.commands = new Discord.Collection()
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
 

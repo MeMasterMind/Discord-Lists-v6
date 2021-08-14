@@ -38,13 +38,21 @@
       </div>
     <% } %>
 
+      <span class="hide" style="display:none !important" id="botid"><%=botid.botid%></span>
       <section class="text-gray-600 body-font">
   <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
     <img alt="hero" src="<%=botid.botavatar%>">
     <div class="text-center lg:w-2/3 w-full">
       <h1 class="flex justify-center title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900" style="color: white !important"><%=botid.botname%><% if(botid.certification === 'certified') { %><img src="https://cdn.glitch.com/1be813f1-4233-4b7a-bf44-8a562481d51f%2FCertified.png?v=1625404757585" title="Certified Bot" height="45" width="60"><% } %></h1>
       <span class="font-bold text-2xl" style="color: var(--main-bg-color);">Prefix : <%=botid.botprefix%></span>
-      <br><br>
+      <br>
+      <br>
+      <div class="double-val-label">
+        <span class="primary">Votes</span>
+        <span id="voteCount"></span>
+      </div>
+      <br>
+      <br>
       <p class="mb-8 leading-relaxed deslong"><%=deslong%></p>
       <div class="flex justify-center">
         <a href="/bot/<%=botid.botid%>/vote"><button class="button-main"><i class="fas fa-arrow-up"></i> Vote </button></a>
@@ -96,6 +104,19 @@
     </div>
   </div>
 </section>
+<script>
+const voteCount = document.getElementById("voteCount")
+const botid = document.getElementById("botid").innerHTML
 
+window.onload = getVotes()
+function getVotes (){
+  fetch('/bot/'+botid+'/getVotes').then(data=>data.json().then(jsonObj=>{
+    for(key in jsonObj) {
+  if (jsonObj.hasOwnProperty(key)) {
+    voteCount.innerHTML = jsonObj[key]
+  }
+}
+  }))
+}
 </script>
        <%- include('./templates/footer.ejs') %>

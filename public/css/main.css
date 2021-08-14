@@ -831,3 +831,33 @@ center h1{
 footer svg{
   width: 21px;
 }
+
+.double-val-label {
+  margin: auto;
+	 display: table;
+	 font-family: 'Roboto', sans-serif;
+}
+ .double-val-label>span {
+	 background-color: #656565;
+	 color: #ffffff;
+	 display: table-cell;
+	 font-size: 0.9em;
+	 font-weight: 400;
+	 line-height: 1;
+	 padding: .3em .6em;
+	 text-align: center;
+	 vertical-align: baseline;
+	 white-space: nowrap;
+}
+ .double-val-label>span:first-child {
+	 border-bottom-left-radius: 0.25em;
+	 border-top-left-radius: .25em;
+}
+ .double-val-label>span:nth-child(2) {
+	 border-bottom-right-radius: 0.25em;
+	 border-top-right-radius: .25em;
+}
+ .double-val-label>span.primary {
+	 background-color: #337ab7;
+}
+ 
