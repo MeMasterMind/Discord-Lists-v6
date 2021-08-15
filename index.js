@@ -246,8 +246,11 @@ const checkAdmin = async (req, res, next) => {
   const reqUser = req.user
   const guild = await client.guilds.cache.get(process.env.SERVERID)
   const role = await guild.members.cache.filter(member => member.roles.cache.find(role => role.name === "Panel Access")).map(member => member.id)
+  console.log(guild)
+  console.log(role)
 
   const bool =role.find(userID=>userID == reqUser.id)
+  console.log(bool)
 
   if(bool){
     next()
@@ -271,14 +274,16 @@ app.get('/staffpanel', checkAuth, checkAdmin,  async function(req, res) {
 //Accept bot from StaffPanel
 app.get("/staffpanel/accept/:id", checkAuth, async (req, res) => {
   const ID = req.params.id
+  await addbot.findOne({botid: ID}).then(bot=>{
   const acceptembed = new Discord.MessageEmbed()
     .setTitle('Bot Approved:')
     .setDescription('A new bot has been approved by our reviewers.')
-    .addField('Bot: ', ID)
+    .addField('Bot: ', bot.botname)
     .addField('Website: ', websiteURL + '/bot/' + ID)
     .addField('Moderator: ', req.user.username + '#' + req.user.discriminator)
     .setFooter('Discord Lists | Bot Approved')
     .setColor('GREEN')
+  })
   await addbot.findOneAndUpdate(
     {
       botid: ID
@@ -398,7 +403,7 @@ app.post('/addbot/success', checkAuth, async function(req, res) {
       .setFooter('Discord Lists | Queued Bot')
       .setColor('YELLOW')
     client.channels.cache.get(process.env.LOGS_CHANNEL).send(embed);
-    client.channels.cache.get(process.env.LOGS_CHANNEL).send('<@&856843836634169374>');
+    client.channels.cache.get(process.env.LOGS_CHANNEL).send('<@&869945590115622946>');
   })()
 })
 
