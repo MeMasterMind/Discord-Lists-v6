@@ -51,9 +51,9 @@ var prompt = 'consent';
 
 // SECRETS FOR CALLBACK SESSION (STORE THEM IN ENV FILE)
 passport.use(new Strategy({
-  clientID: '870310174953467985',
-  clientSecret: 'mFAERH4aSakeJrJeWwfuwUVo_THgIFMc',
-  callbackURL: 'https://discordlists100.xyz/api/callback',
+  clientID: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
+  callbackURL: process.env.CALLBACK_URL,
   scope: scopes,
   prompt: prompt,
 }, function(accessToken, refreshToken, profile, done) {
