@@ -3,31 +3,30 @@
 
 We are glad to announce the release of V6 for Discord Lists!
 
- About Version 6:
+# _Changelog_
 
-## **Added:**
-1. Changed the entire website's theme into something even more refreshing and cool!
-2. Website Background
-3. Phone Compatibility
-4. Vanity Links (I know we had that but it was very broken so we just re-did the whole thing)
+## **Added**
+- Certification
+- Enitire front-end
+- FAQ
+- Bot Automation
+- Diverse #log messages (most of them are for staff only.)
+- Staff Panel
+- More details in bot page
 
-## **Removed:**
+## **Changed**
+- Search is now available for names, tags and descriptions as well!
+- Certification is now built in (only OGs will remember the google form certification lol)
+- Discord Lists V6 Bot
+- Changed the websites theme into something new and more refreshing! from colors to elements. everything.
+- No more templates!
 
-1. Theme change
-2. Templates
+## **Removed**
+- Absolutely everything from V5.
 
-## **Returned:**
+## **Bonus**
+We are going open-source! Yes, you read it right. We are making the bot list open-source for everyone to dive in and contribute together to make it even better!
 
-1. The most suggested feature to return, Certified Bots!
-
-## **Fixed:**
-
-1. Search Bots
-
-## **Changed:**
-
-1. Certification to be a form in the website and not a google form (if your an OG web user you should remember us using a google form for certification.)
-2. The bot list is now open-source! 
 
 # **Contributing**
 In the spirit of [free software](http://www.fsf.org/licensing/essays/free-sw.html), everyone is encouraged to help improve this project. Here are a few ways you can pitch in:
@@ -36,3 +35,5 @@ In the spirit of [free software](http://www.fsf.org/licensing/essays/free-sw.htm
  - Fix bugs and submit pull requests.
  - Write, clarify or fix documentation.
  - Refactor code.
+
+More details in [CONTRIBUTING.md](../blob/main/CONTRIBUTING)
