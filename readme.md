@@ -37,3 +37,12 @@ In the spirit of [free software](http://www.fsf.org/licensing/essays/free-sw.htm
  - Refactor code.
 
 More details in [CONTRIBUTING.md](../main/CONTRIBUTING.md)
+
+## Core Team
+
+Thanks to the following people for making Discord Lists possible 💝
+- [@Mastermind](https://github.com/memastermind) (Frontend + Backend)
+- [@CrazyBotBoy](https://github.com/pasindudushan) (Backend)
+- [@tech commander]() (Discord API)
+- [@firefish]() (Misc)
+- [@Joe]() (Misc)
