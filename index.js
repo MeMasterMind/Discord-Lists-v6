@@ -107,18 +107,6 @@ app.get('/discord', (req, res) => {
   res.redirect("https://discord.gg/B6b8vqZHfF")
 })
 
-app.get('/bug', async function(req, res) {
-  const login_logout = req.isAuthenticated()
-  const verified_bots = await addbot.find({ state: 'verified' }).limit(2)
-  const random_bot = await addbot.find({ state: 'verified' }).limit(1)
-  const certified_bots = await addbot.find({ certification: 'certified' })
-  res.render('bugs', {
-    verified_bots: verified_bots,
-    certified_bots: certified_bots,
-    random_bot: random_bot,
-    login_logout: login_logout
-  })
-})
 
 
 app.get('/beta', async function(req, res) {
@@ -138,7 +126,7 @@ app.get('/api/callback',
     const avatarURL = "https://cdn.discordapp.com/avatars/"+userID+"/"+avatarID
 
     res.redirect('/user/@me')
-    client.channels.cache.get(process.env.LOGS_CHANNEL).send(
+    client.channels.cache.get(process.env.LOGIN_LOGS_CHANNEL).send(
       new Discord.MessageEmbed()
         .setTitle('Login Detected')
         .setColor('GREEN')
@@ -245,7 +233,7 @@ app.get('/partners', function(req, res) {
 const checkAdmin = async (req, res, next) => {
   const reqUser = req.user
   const guild = await client.guilds.cache.get(process.env.SERVERID)
-  const role = await guild.members.cache.filter(member => member.roles.cache.find(role => role.name === "Panel Access")).map(member => member.id)
+  const role = await guild.members.cache.filter(member => member.roles.cache.find(role => role.id === "869945590178545686")).map(member => member.id)
   console.log(guild)
   console.log(role)
 
@@ -255,14 +243,16 @@ const checkAdmin = async (req, res, next) => {
   if(bool){
     next()
   }
+  // disabled temporarily since staff panel doesnt work... ANYONE CANN ACCESS PANEL NOW
   else{
     res.redirect("/error?code=403&message=You don't have sufficient permissions to access this page!")
   }
 }
 
 
+
 //Staff Panel:
-app.get('/staffpanel', checkAuth, checkAdmin,  async function(req, res) {
+app.get('/staffpanel', checkAuth, checkAdmin, async function(req, res) {
   const login_logout = req.isAuthenticated()
   const unverifiedBot = await addbot.find({ state: "unverified" })
 
@@ -271,6 +261,23 @@ app.get('/staffpanel', checkAuth, checkAdmin,  async function(req, res) {
   })
 })
 
+app.get('/bug',   async function(req, res) {
+  const login_logout = req.isAuthenticated()
+
+
+  res.render('bugs', {
+    login_logout,
+  })
+})
+
+app.get('/staffapplications', checkAuth,  async function(req, res) {
+  const login_logout = req.isAuthenticated()
+  const unverifiedBot = await addbot.find({ state: "unverified" })
+
+  res.render('staff-apps', {
+    login_logout, unverifiedBot
+  })
+})
 //Accept bot from StaffPanel
 app.get("/staffpanel/accept/:id", checkAuth, async (req, res) => {
   const ID = req.params.id
@@ -577,6 +584,9 @@ app.post('/bot/vote/:botid', checkAuth, async function(req, res) {
 //  votes12hr.deleteMany({ms:45000}).then(data=>console.log(data))
 
 // My Profile Data
+
+
+
 app.get('/user/@me', checkAuth, async function(req, res) {
   const user = req.user
   const login_logout = req.isAuthenticated()
@@ -594,15 +604,20 @@ app.get('/user/@me', checkAuth, async function(req, res) {
       { upsert: true }
     )
   }
+  // My Profile Data
+
   const botdata = await addbot.find({ botowner: `${req.user.username}#${req.user.discriminator}` })
   const bots = botdata
 
   const reqUser = req.user
   let userHasAccessToStaffPanel = false;
   const guild = await client.guilds.cache.get(process.env.SERVERID)
-  const role = await guild.members.cache.filter(member => member.roles.cache.find(role => role.name === "Panel Access")).map(member => member.id)
+  const role = await guild.members.cache.filter(member => member.roles.cache.has(role => role.id === "869945590115622946")).map(member => member.id)
+  console.log('Guild - ' + guild)
+  console.log('Role - ' + role)
 
   const bool =role.find(userID=>userID == reqUser.id)
+  console.log(bool)
 
   if(bool){
     userHasAccessToStaffPanel = true

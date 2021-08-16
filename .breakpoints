@@ -3,29 +3,29 @@
     "index.js": [
       {
         "id": "b3f9b000-62f0-481a-bef1-4b20797c246f",
-        "line": 559,
-        "version": 13350,
-        "index": 15840
+        "line": 1,
+        "version": 14955,
+        "index": 0
       },
       {
         "id": "89673ae2-db9b-4985-bd06-bfe907e4da90",
-        "line": 562,
-        "version": 13350,
-        "index": 15959
+        "line": 1,
+        "version": 14955,
+        "index": 0
       }
     ],
     "public/css/main.css": [
       {
         "id": "91b05c06-989f-4d9a-878b-120b64646c81",
         "line": 319,
-        "version": 2609,
+        "version": 2628,
         "index": 5411
       },
       {
         "id": "06625a08-2d46-4ad0-b3af-b3dc4b33ff8c",
-        "line": 733,
-        "version": 2609,
-        "index": 13028
+        "line": 734,
+        "version": 2628,
+        "index": 13050
       }
     ],
     "views/beta.ejs": [
@@ -40,13 +40,13 @@
       {
         "id": "528d0daa-8639-4905-81af-7e1c7672b458",
         "line": 1,
-        "version": 2305,
+        "version": 2307,
         "index": 0
       },
       {
         "id": "a8f25243-089c-41d5-9172-21e8269c4f33",
         "line": 1,
-        "version": 2305,
+        "version": 2307,
         "index": 0
       }
     ],
