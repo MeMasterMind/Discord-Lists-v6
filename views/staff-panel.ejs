@@ -119,13 +119,15 @@ Swal.fire(
 
 /* Modal Content */
 .modal-content {
-  background-color: white;
+  background-color: #232323;
+  color:orange;
   margin: auto;
   padding: 20px;
-  border: 1px solid #888;
+  border: 1px solid orange;
   width: 80%;
 }
-
+.black{
+font-color:black;}
 /* The Close Button */
 .close {
   color: #aaaaaa;
@@ -133,7 +135,9 @@ Swal.fire(
   font-size: 28px;
   font-weight: bold;
 }
-
+.p{
+font-color:#0000FF;
+}
 .close:hover,
 .close:focus {
   color: #000;
@@ -144,7 +148,6 @@ Swal.fire(
 </head>
 <body>
 
-<h2>Modal Example</h2>
 
 <!-- Trigger/Open The Modal -->
 
@@ -154,8 +157,8 @@ Swal.fire(
   <!-- Modal content -->
   <div class="modal-content">
 
-    <span class="close">&times;</span>
-    <p>Some text in the Modal..</p>
+   <span class="close">&times;</span>
+    <p class="p">Some text in the Modal..</p>
   </div>
 
 </div>

@@ -26,6 +26,7 @@
     "passport": "^0.4.1",
     "passport-discord": "^0.1.4",
     "pug": "^3.0.2",
+    "showdown": "^1.9.1",
     "sweetalert2": "^11.1.2",
     "textversionjs": "^1.1.3"
   }
