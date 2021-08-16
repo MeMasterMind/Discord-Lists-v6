@@ -7,6 +7,7 @@ We are glad to announce the release of V6 for Discord Lists!
 
 ## **Added**
 - Certification
+- Vanity URLs 
 - Enitire front-end
 - FAQ
 - Bot Automation
