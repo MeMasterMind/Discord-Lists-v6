@@ -7,6 +7,7 @@ We are glad to announce the release of V6 for Discord Lists!
 
 ## **Added**
 - Certification
+- Vanity URLs 
 - Enitire front-end
 - FAQ
 - Bot Automation
@@ -43,6 +44,7 @@ More details in [CONTRIBUTING.md](../main/CONTRIBUTING.md)
 Thanks to the following people for making Discord Lists possible 💝
 - [@Mastermind](https://github.com/memastermind) (Frontend + Backend)
 - [@CrazyBotBoy](https://github.com/pasindudushan) (Backend)
-- [@tech commander]() (Discord API)
+- [@tech commander](https://github.com/tech-commander) (Discord API + Frontend)
 - [@firefish]() (Misc)
 - [@Joe]() (Misc)
+- [@Koushik Puppala](https://github.com/koushikpuppala) (Misc)
