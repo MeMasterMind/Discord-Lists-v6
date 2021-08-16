@@ -1,7 +1,7 @@
 
 # Discord Lists V6:
 
-We are glad to announce the release of V6 for Discord Lists!
+We are glad to announce the release of V6 for Discord Lists! Make sure to read the wiki before starting this template.
 
 # _Changelog_
 
