@@ -1,4 +1,4 @@
-
+![Discord Lists Logo](https://cdn.discordapp.com/attachments/870296629134114817/870305666978439208/Discord_Lists_V6_Logo.png)
 # Discord Lists V6:
 
 We are glad to announce the release of V6 for Discord Lists! Make sure to read the wiki for setup instructions.
