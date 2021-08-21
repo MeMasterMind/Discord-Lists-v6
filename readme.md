@@ -48,3 +48,8 @@ Thanks to the following people for making Discord Lists possible 💝
 - [@firefish]() (Misc)
 - [@Joe]() (Misc)
 - [@Koushik Puppala](https://github.com/koushikpuppala) (Misc)
+
+## Legal Issues
+when using this project for your organization/company/website, added to the [LICENSE](../main/LICENSE.md) you **must** include the following in your footer/credits/about page: 
+"`Made with Discord Lists (link to our repo or website)`". 
+
