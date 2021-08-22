@@ -1,9 +1,11 @@
-![Discord Lists Logo](https://cdn.discordapp.com/attachments/870296629134114817/870305666978439208/Discord_Lists_V6_Logo.png)
-# Discord Lists V6:
+<p align="center"><a href="https://discordlists100.xyz"><img height="250" src="https://cdn.discordapp.com/attachments/870296629134114817/870305666978439208/Discord_Lists_V6_Logo.png"></a></p>
 
-We are glad to announce the release of V6 for Discord Lists! Make sure to read the wiki for setup instructions.
+<h1 align="center"> Discord Lists V6 </h1>
 
-# _Changelog_
+<p align="center">We are glad to announce the release of V6 for Discord Lists! <br> Make sure to read the wiki for setup instructions.</p>
+<hr>
+
+# Changelog
 
 ## **Added**
 - Certification
@@ -48,6 +50,9 @@ Thanks to the following people for making Discord Lists possible 💝
 - [@firefish]() (Misc)
 - [@Joe]() (Misc)
 - [@Koushik Puppala](https://github.com/koushikpuppala) (Misc)
+
+## Setup
+Read the [Wiki](https://github.com/Discord-Lists/Discord-Lists-v6/wiki) for setup instructions.
 
 ## Legal Issues
 when using this project for your organization/company/website, added to the [LICENSE](../main/LICENSE.md) you **must** include the following in your footer/credits/about page: 
