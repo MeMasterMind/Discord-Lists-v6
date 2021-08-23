@@ -2,66 +2,38 @@
  <%- include('./templates/nav.ejs') %> 
 <br><Br><Br><Br>
 <head><title>Report Bugs</title></head>
+<script>
+function showSnackbar() {
+  const snackbar = document.querySelector(".snackbar");
+  snackbar.classList.add("show");
+  setTimeout(() => snackbar.classList.remove("show"), 5000);
+}
+window.onload = ()=>{
+setTimeout(function(){
+ 	showSnackbar()
+}, 1000);
+}
+</script>
+
+<% if(success) {%>
+<div class="snackbar">
+  <div>Successfully submitted!</div>
+</div>
+<% } %>
+
 <H1><i class="fas fa-bug"></i> Bug Reports <H1>
 <p style="padding:100px">Found a Vulnerability? Bug? Something unexpected? Report here! Make sure to join our Discord. We will respond as soon as we can. In case of any issues, contact a staff or a mod, they will assist you.</p>
 <br>
 
-<form onsubmit=reportBug() id="bugform">
+<form method="POST" action="/reportbug">
 <div id="bugformDIV">
-<input id="bugTitle" placeholder="Title" type="text" class="form-input"required></input>
-<input id="bugDesc" placeholder="Description" type="text" class="form-input" required></input>
-<input id="userIDandTag" placeholder="Your Discord ID and Tag" type="text" class="form-input" required>
+<input id="title" placeholder="Title" type="text" class="form-input"required name="title"></input>
+<input id="desc" placeholder="Description" type="text" class="form-input" required name="desc"></input>
+<input id="useridandtag" placeholder="Your Discord ID and Tag" type="text" class="form-input" required name="useridandtag">
 </div><br>
 <input type="submit" class="button-main" style="transform: translate(0, -50px);"></input>
 </form>
 
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<Script>
-var form = document.getElementById("bugform")
-bugform.addEventListener("submit", event=>{event.preventDefault()})
-
-
-function reportBug(){
-var bugTitle = document.getElementById("bugTitle").value
-var bugDesc = document.getElementById("bugDesc").value
-var userIDandTag = document.getElementById("userIDandTag").value
-var webURL = "https://discord.com/api/webhooks/870893218907193345/1pFjFnzc7s_HhOHOCVCGbLhZTKCn1qnJQnWXUFKl-K74vhJ5ZlVpbxBqu7dL1deQK5Tc"
-var request = new XMLHttpRequest();
-request.open("POST", webURL);
-
-request.setRequestHeader('Content-type', 'application/json');
-
-var myEmbed = {
-  author: {
-    name: userIDandTag
-  },
-  title: bugTitle,
-  description: bugDesc,
-  color: hexToDecimal("#FC6B29")
-}
-
-var params = {
-  username: "Bug Reporter",
-  embeds: [ myEmbed ]
-}
-
-request.send(JSON.stringify(params));
-
-// function that converts a color HEX to a valid Discord color
-function hexToDecimal(hex) {
-  return parseInt(hex.replace("#",""), 16)
-}
-Swal.fire({
-  icon: "success",
-  title: "Successfully submitted!",
-  html: 'Join our <u><a href="/join" style="color:#0d6efd">Discord</a></u> to get further assisted.'
-}).then((result) => {
-  if (result.isConfirmed) {
-    window.location.reload()
-  } 
-})
-
-}
-</script>
  <%- include('./templates/footer.ejs') %> 

@@ -16,13 +16,14 @@
     <title>Discord Lists | Error</title>
   </head>
   <body>
+  <Br><br>
       <h1>Error</h1>
       <br><br>
-      <div class="center-flex" style="color:var(--main-bg-color)">
-      <% if(code) {%> <h1><%=code%></h1><% } %>
+      <div class="center-flex">
+      <% if(code) {%> <h1 style="color: var(--main-bg-color)"><%=code%></h1><% } %>
       </div>
       <div class="center-flex">
       <% if(message) {%> <h4><%=message%></h4><% } %> </div>
-      <br><br>
+      <br><br><Br><br>
       <p>Found a bug? What's to ponder, <a href="/bug" style="text-decoration:underline;">report</a> it!  </p>
  <%- include('./templates/footer.ejs') %> 
