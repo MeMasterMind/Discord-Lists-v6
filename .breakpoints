@@ -4,28 +4,70 @@
       {
         "id": "b3f9b000-62f0-481a-bef1-4b20797c246f",
         "line": 1,
-        "version": 14955,
+        "version": 18441,
         "index": 0
       },
       {
         "id": "89673ae2-db9b-4985-bd06-bfe907e4da90",
         "line": 1,
-        "version": 14955,
+        "version": 18441,
         "index": 0
+      },
+      {
+        "id": "6512fbb3-8052-40f9-87bd-c98de00ece75",
+        "line": 20,
+        "version": 18441,
+        "index": 739
+      },
+      {
+        "id": "5ac9b8f4-b1a1-4288-b81b-a9ddb190d0c0",
+        "line": 34,
+        "version": 18441,
+        "index": 1439
+      },
+      {
+        "id": "fac8ff94-207d-4974-a87f-0a3942029573",
+        "line": 34,
+        "version": 18441,
+        "index": 1439
+      },
+      {
+        "id": "7dc4a843-6cfb-436c-ac57-1b5ce624f180",
+        "line": 34,
+        "version": 18441,
+        "index": 1439
+      },
+      {
+        "id": "e8caf01b-f20f-4660-9ef6-1583058eaac0",
+        "line": 323,
+        "version": 18441,
+        "index": 8390
+      },
+      {
+        "id": "5fd1b093-1ac3-4cca-81c6-0d6c51737539",
+        "line": 397,
+        "version": 18530,
+        "index": 10254
+      },
+      {
+        "id": "18ae7529-dbc0-4679-8169-9d87275900f2",
+        "line": 733,
+        "version": 18441,
+        "index": 19985
       }
     ],
     "public/css/main.css": [
       {
         "id": "91b05c06-989f-4d9a-878b-120b64646c81",
-        "line": 319,
-        "version": 2628,
-        "index": 5411
+        "line": 337,
+        "version": 2783,
+        "index": 5650
       },
       {
         "id": "06625a08-2d46-4ad0-b3af-b3dc4b33ff8c",
-        "line": 734,
-        "version": 2628,
-        "index": 13050
+        "line": 755,
+        "version": 2783,
+        "index": 13289
       }
     ],
     "views/beta.ejs": [
@@ -40,30 +82,64 @@
       {
         "id": "528d0daa-8639-4905-81af-7e1c7672b458",
         "line": 1,
-        "version": 2307,
+        "version": 2309,
         "index": 0
       },
       {
         "id": "a8f25243-089c-41d5-9172-21e8269c4f33",
         "line": 1,
-        "version": 2307,
+        "version": 2309,
         "index": 0
+      }
+    ],
+    "views/bugs.ejs": [
+      {
+        "id": "57bd2b26-3ab7-402d-a344-6d313efaca97",
+        "line": 37,
+        "version": 1524,
+        "index": 1290
+      },
+      {
+        "id": "3697f8ff-829d-4fd0-91df-8acf59d62e6f",
+        "line": 37,
+        "version": 1524,
+        "index": 1290
       }
     ],
     "views/index.ejs": [
       {
         "id": "694eccc3-518e-44bb-97cb-c08f6d27c2e8",
-        "line": 28,
-        "version": 1814,
-        "index": 988
+        "line": 29,
+        "version": 1881,
+        "index": 1044
+      },
+      {
+        "id": "69d135b4-835d-4936-8751-2dffd06c2a8f",
+        "line": 41,
+        "version": 1881,
+        "index": 1564
       }
     ],
     "views/search.ejs": [
       {
         "id": "2cb29ee0-dd49-42b4-825e-c66b29c5043f",
         "line": 6,
-        "version": 1173,
+        "version": 1175,
         "index": 159
+      }
+    ],
+    "views/staff-apps.ejs": [
+      {
+        "id": "ec27c29a-9b42-4923-859e-dba805a56a85",
+        "line": 5,
+        "version": 2184,
+        "index": 123
+      },
+      {
+        "id": "a9fa5427-8ffc-4061-87c4-793c54c1c26d",
+        "line": 55,
+        "version": 2184,
+        "index": 2019
       }
     ]
   }

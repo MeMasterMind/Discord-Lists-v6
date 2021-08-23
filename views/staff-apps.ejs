@@ -1,65 +1,79 @@
- <%- include('./templates/header.ejs') %>
+
+<%- include('./templates/header.ejs') %>
  <%- include('./templates/nav.ejs') %> 
-<br><Br><Br><Br>
-<H1><i class="fas fa-user-check"></i> Bug Reports <H1>
-<p style="padding:100px">Found a Vulnerability? Bug? Something unexpected? Report here! Make sure to join our Discord. We will respond as soon as we can. In case of any issues, contact a staff or a mod, they will assist you.</p>
+ <head><title>Staff Apps </title></head>
+<br><br>
+<center>
+<h1> <i class="fas fa-star" aria-hidden="true"></i> Staff Apps </h1>
 <br>
-<form onsubmit=reportBug() id="bugform">
-<div id="bugformDIV">
-<input id="bugTitle" placeholder="Title" type="text" class="form-input"required></input>
-<input id="bugDesc" placeholder="Description" type="text" class="form-input" required></input>
-<input id="userIDandTag" placeholder="Your Discord ID and Tag" type="text" class="form-input" required>
-</div><br>
-<input type="submit" class="button-main" style="transform: translate(0, -50px);"></input>
+<p> Fill the form below to apply for becoming a staff in our server. <p>
+<Br><Br><Br>
+<form id="form" action="/staffapplications" method="POST">
+  <div class="col-md-4">
+    <label for="a" class="form-label">How old are you? Honesty is the best policy.</label>
+    <input type="text" class="form-control" name="a" id="a" placeholder="" required>   
+    </input>
+  </div>
+<br>
+  <div class="col-md-4">
+    <label for="b" class="form-label">What role are you applying for?</label>
+    <input type="text" class="form-control" name="b" id="b" placeholder="" required>
+    </input>
+  </div>
+<br>
+  <div class="col-md-4">
+    <label for="c" class="form-label">Why do you want to be a Moderator?</label>
+    <input type="text" class="form-control" name="c" id="c" placeholder="" required>
+    </input>
+  </div>
+<br>
+  <div class="col-md-4">
+    <label for="d" class="form-label">Why should we select you over other applicants?</label>
+    <input type="text" class="form-control" name="d" id="d" placeholder="" required>
+    </input>
+  </div>
+<br>
+  <div class="col-md-4">
+    <label for="e" class="form-label">What are the three adjectives that describe you the best?</label>
+    <input type="text" class="form-control" name="e" id="e" placeholder="" required>
+    </input>
+  </div>
+<br>
+  <div class="col-md-4">
+    <label for="f" class="form-label">Any suggestions/improvements for Discord Lists on your mind? or anything else you want to say?</label>
+    <input type="text" class="form-control" name="f" id="f" placeholder="" >
+    </input>
+  </div>
+<Br>
+  <div class="col-md-4">
+    <label for="g" class="form-label">Tell us a joke. The creative the better.</label>
+    <input type="text" class="form-control" name="g" id="g" placeholder="" required>
+    </input>
+  </div>
+<br>
+<br>
+  <div class="col-md-4">
+  <button class="button-main" type="submit" id="submit-btn">Submit</submit>
+  </div>
 </form>
-
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<Script>
-var form = document.getElementById("bugform")
-bugform.addEventListener("submit", event=>{event.preventDefault()})
-
-
-function reportBug(){
-var bugTitle = document.getElementById("bugTitle").value
-var bugDesc = document.getElementById("bugDesc").value
-var userIDandTag = document.getElementById("userIDandTag").value
-var webURL = "https://discord.com/api/webhooks/870893218907193345/1pFjFnzc7s_HhOHOCVCGbLhZTKCn1qnJQnWXUFKl-K74vhJ5ZlVpbxBqu7dL1deQK5Tc"
-var request = new XMLHttpRequest();
-request.open("POST", webURL);
-
-request.setRequestHeader('Content-type', 'application/json');
-
-var myEmbed = {
-  author: {
-    name: userIDandTag
-  },
-  title: bugTitle,
-  description: bugDesc,
-  color: hexToDecimal("#FC6B29")
+<script>
+function showSnackbar() {
+  const snackbar = document.querySelector(".snackbar");
+  snackbar.classList.add("show");
+  setTimeout(() => snackbar.classList.remove("show"), 5000);
 }
-
-var params = {
-  username: "Bug Reporter",
-  embeds: [ myEmbed ]
-}
-
-request.send(JSON.stringify(params));
-
-// function that converts a color HEX to a valid Discord color
-function hexToDecimal(hex) {
-  return parseInt(hex.replace("#",""), 16)
-}
-Swal.fire({
-  icon: "success",
-  title: "Successfully submitted!",
-  html: 'Join our <u><a href="/join" style="color:#0d6efd">Discord</a></u> to get further assisted.'
-}).then((result) => {
-  if (result.isConfirmed) {
-    window.location.reload()
-  } 
-})
-
+window.onload = ()=>{
+setTimeout(function(){
+ 	showSnackbar()
+}, 1000);
 }
 </script>
+
+<% if(success) {%>
+<div class="snackbar">
+  <div>Successfully submitted!</div>
+</div>
+<% } %>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  <%- include('./templates/footer.ejs') %> 
+ 

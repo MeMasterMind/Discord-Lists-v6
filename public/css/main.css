@@ -92,10 +92,24 @@ h2{
   font-weight: bold;
 }
 
-body h1,h2,h3,h4,h5,h6,p,span{
-  color: #fff !important;
+li{
+  list-style: auto;
 }
 
+ul,ol{
+  text-align: left;
+  margin: 10px;
+}
+body h1,h2,h3,h4,h5,h6,p,span,tr,td,li{
+  color: #fff ;
+}
+tr{
+  border: 0.1px solid #fff
+}
+
+td{
+  padding: 7px;
+}
 .text-center{
   text-align: center;
 }
@@ -864,4 +878,39 @@ footer svg{
  .double-val-label>span.primary {
 	 background-color: #337ab7;
 }
- 
+
+.hide{
+  display: none;
+}
+.snackbar {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: bottom 0.5s, opacity 0.5s;
+}
+
+.snackbar > div {
+  background-color: #1FD78D;
+  color: white;
+
+  min-width: 150px;
+  padding: 15px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 5px;
+}
+
+.snackbar.show {
+  bottom: 30px;
+  opacity: 1;
+
+  pointer-events: all;
+}

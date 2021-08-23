@@ -15,6 +15,7 @@
     <title>Discord Lists | Staff Panel</title>
   </head>
   <body>
+  <br><br />
       <center><h1>Staff Panel</h1></center>
       <div class="center-flex">
       <p>Accept/Deny bots here!</p>
@@ -34,7 +35,7 @@
         </symbol>
       </svg>
       <div class="alert alert-danger d-flex align-items-center" role="alert">
-        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+        <svg class="bi flex-shrink-0 me-2" width="20" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
         <div>
             Unapproved bots waiting = 0        
         </div>
@@ -99,8 +100,106 @@ Swal.fire(
 
 </script>
 <center>
+ <% if(ceo){ %>
+  <button class="button-main" id="myBtn" ><i class="fas fa-cog"></i>  Settings </button>
+  <% } %>
+
+<% if(!ceo){ %>
+  <button class="button-main" id="myBtn" disabled><i class="fas fa-cog"></i> Settings </button>
+  <% } %>
+
+
+</head>
+<body>
+
+
+<!-- Trigger/Open The Modal -->
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+
+   <span class="close"></span>
+   <h1> Settings </h1>
+    <h3>CEO Settings</h3>
+    <br>
+
+
+    <!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+<br>
+<center>
+<H3>Maintenance Mode</H3>
+  <form method="POST" action="/start-mainmode">
+  <button type="submit" class="button-main">Turn ON</button>
+  </form>
+  <form method="POST" action="/stop-mainmode">
+  <button type="submit" class="button-main">Turn OFF</button>
+  </form>
+</center>
+</div>
+
+<br>
+
+
+  </div>
+
+</div>
+
+
+<!---
+<label class="switch">
+
+  <input type="checkbox" >
+
+ <span class="slider round">
+</span>
+
+</label><br>
+<h4> Global Banner Message:</h4>
+<label class="switch">
+
+  <input type="checkbox" id="chkPassport" onclick="ShowHideDiv(this)" >
+
+ <span class="slider round">
+</span>
+
+</label>
+<script type="text/javascript">
+    function ShowHideDiv(chkPassport) {
+        var dvPassport = document.getElementById("dvPassport");
+        dvPassport.style.display = chkPassport.checked ? "block" : "none";
+    }
+</script>
+<br>
+<div id="dvPassport" style="display: none">
+  <p> Banner Message :</p>
+    <input type="text" id="txtPassportNumber" />--->
+
+
+
+</center>
+<div style="height:100vh"></div>
+<%- include('./templates/footer.ejs') %>
+<!---
+<form action="https://a-botlist-without-a-name.crazybotboy.repl.co/maintenance?access_key=pw1234" method="post">
+  <label for="mode">First name:</label>
+  <input type="text" id="mode" name="mode"><br><br>
  
-<button class="button-main" id="myBtn"><i class="fas fa-cog"></i> Settings </button>
+  <input type="submit" value="Submit">
+</form>
+-->
+
+
+
 <style>
 /* The Modal (background) */
 .modal {
@@ -124,7 +223,7 @@ Swal.fire(
   margin: auto;
   padding: 20px;
   border: 1px solid orange;
-  width: 80%;
+  width: 70%;
 }
 .black{
 font-color:black;}
@@ -144,27 +243,74 @@ font-color:#0000FF;
   text-decoration: none;
   cursor: pointer;
 }
+.highlight-white{
+background-color:#fc6b29;
+border-radius: 10px;
+padding: 3pt;
+width: 50%;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #AA4A44;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
 </style>
-</head>
-<body>
 
-
-<!-- Trigger/Open The Modal -->
-
-<!-- The Modal -->
-<div id="myModal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-
-   <span class="close">&times;</span>
-    <p class="p">Some text in the Modal..</p>
-  </div>
-
-</div>
-
-<script>
-// Get the modal
+<script> // Get the modal
 var modal = document.getElementById("myModal");
 
 // Get the button that opens the modal
@@ -189,17 +335,5 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
 </script>
-
-</center>
-<div style="height:100vh"></div>
-<%- include('./templates/footer.ejs') %>
-<!---
-<form action="https://a-botlist-without-a-name.crazybotboy.repl.co/maintenance?access_key=pw1234" method="post">
-  <label for="mode">First name:</label>
-  <input type="text" id="mode" name="mode"><br><br>
- 
-  <input type="submit" value="Submit">
-</form>
--->
-
