@@ -5,7 +5,7 @@
 <p align="center">We are glad to announce the release of V6 for Discord Lists! <br> Make sure to read the wiki for setup instructions.</p>
 <hr>
 
-**I have stopped updating this repository and this is a copy of the website before 30th August 2021. [Read More](https://discordlistsdestruction.memastermind.repl.co)**
+**I have stopped updating this repository and this is a copy of the website before 25th August 2021. Screenshots soon! [Read More](https://discordlistsdestruction.memastermind.repl.co)**
 
 # Changelog
 
